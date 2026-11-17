@@ -1,0 +1,51 @@
+name: Restore original-resolution project images
+on:
+  push:
+    paths:
+      - .github/workflows/restore-original-media.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download source images and verify exact resolution
+        env:
+          PHOTO_URL: 'https://media.canva.com/v2/image-resize/format:JPG/height:1600/quality:90/uri:ifs%3A%2F%2FM%2F93da1650-ed45-4e7d-8c2b-abe3f2109d8f/watermark:F/width:900?csig=AAAAAAAAAAAAAAAAAAAAANdipZlEY-2VwxiCNWZx4Ev4wcjBrH7Fu0bzSbMCgSUC&exp=1794961446&osig=AAAAAAAAAAAAAAAAAAAAALDxZbl20XM6RqpYzeMNmOSluTj_IT-khl74FSo5Y4Mw&signer=media-rpc&token=AAIAAU0AJDkzZGExNjUwLWVkNDUtNGU3ZC04YzJiLWFiZTNmMjEwOWQ4ZgAAAAABoewKFHA5HiwuwNYn1nveyuOt-zAsQrUlsyCng323oTyMsasTtQ'
+          CONCEPT_URL: 'https://media.canva.com/v2/image-resize/format:PNG/height:1086/quality:90/uri:ifs%3A%2F%2FM%2F7988ae08-1083-4477-8993-0826b5bc51cb/watermark:F/width:1448?csig=AAAAAAAAAAAAAAAAAAAAAGz4D0_4TUU9M9gYYUl-8SFAu0PIF-pHZKgPmgv8kVYQ&exp=1794959769&osig=AAAAAAAAAAAAAAAAAAAAAP5Dl31gFpIsmVeSgpbDSuSYyNkBQV1wSs7aU4Dk5m59&signer=media-rpc&token=AAIAAU0AJDc5ODhhZTA4LTEwODMtNDQ3Ny04OTkzLTA4MjZiNWJjNTFjYgAAAAABoevwfagw5L_SxyO9x_nNQja2g8VZASSrl2JXVhfU-iORlU58Cg'
+        run: |
+          set -euo pipefail
+          python -m pip install pillow
+          mkdir -p docs/photos docs/historical
+          curl -fLsS --retry 2 "$PHOTO_URL" -o /tmp/actual-photo.jpg
+          curl -fLsS --retry 2 "$CONCEPT_URL" -o /tmp/original-concept.png
+          python - <<'PY'
+          from PIL import Image
+          src=Image.open('/tmp/actual-photo.jpg')
+          assert src.width>=900 and src.height>=1600, f"Photo not original resolution: {src.size}"
+          src.convert('RGB').save('docs/photos/prototype-installed-relife-rl-m3t.jpg',quality=93,subsampling=0,optimize=True)
+          concept=Image.open('/tmp/original-concept.png')
+          assert concept.width>=1448 and concept.height>=1086, f"Diagram not full resolution: {concept.size}"
+          concept.save('docs/historical/microscope-head-concept-original.png',optimize=True)
+          print('Saved verified original sizes:',src.size,concept.size)
+          PY
+      - name: Commit verified images
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/photos/prototype-installed-relife-rl-m3t.jpg docs/historical/microscope-head-concept-original.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Media: restore original-size microscope photo and historical concept diagram"
+            for i in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep 2
+            done
+            exit 1
+          fi
