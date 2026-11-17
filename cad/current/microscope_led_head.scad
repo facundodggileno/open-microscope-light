@@ -1,7 +1,7 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.13
+  Cabezal modular paramétrico V0.14
   OpenSCAD
 
   Cambios V0.11:
@@ -201,22 +201,20 @@ module ring_body(){
 
 module arm_part(){
     /*
-      V0.13 - pivote corregido de forma simple.
+      V0.14 - brazo extendido 5 mm hacia el pivote.
 
-      Geometría:
-      [lengüeta/barra] -> [cuello central angosto] -> [cilindro M3]
-
-      El cilindro queda completamente libre por ambos laterales.
-      No hay brazos laterales, escalones ni geometría que lo envuelva.
+      Cambio:
+      - Se mantiene la posición del agujero M3 que fija el brazo al aro.
+      - Se desplazan 5 mm hacia afuera el cuello central y el cilindro del pivote.
+      - Resultado: mayor separación entre el tornillo aro-brazo y la articulación pod-brazo.
     */
 
     base_r_local = ring_od/2 - arm_tongue_l + 1.0;
-    pivot_x = arm_pivot_r - base_r_local;
 
-    pivot_radius = arm_pivot_ear_d/2;
+    // Posición anterior del pivote + 5 mm hacia afuera
+    pivot_x = (arm_pivot_r - base_r_local) + 5.0;
 
-    // La parte ancha termina 5 mm antes del centro del pivote.
-    // Eso deja un cuello central claramente visible.
+    // Cuello central
     neck_len = 5.0;
     neck_w   = 5.0;
 
@@ -225,15 +223,14 @@ module arm_part(){
 
     difference(){
         union(){
-            // Parte principal recta del brazo.
-            // Conserva el ancho de la lengüeta de encastre.
+            // Barra principal extendida
             translate([wide_len/2, 0, arm_tongue_t/2])
                 cube([wide_len,
                       arm_tongue_w,
                       arm_tongue_t],
                      center=true);
 
-            // ÚNICO cuello central, desde atrás hasta el centro del cilindro.
+            // Cuello central
             translate([wide_end_x + neck_len/2,
                        0,
                        arm_t/2])
@@ -242,7 +239,7 @@ module arm_part(){
                       arm_t],
                      center=true);
 
-            // Cilindro completo y expuesto.
+            // Cilindro del pivote
             translate([pivot_x,0,arm_t/2])
                 rotate([90,0,0])
                     cylinder(h=arm_pivot_ear_t,
@@ -250,22 +247,22 @@ module arm_part(){
                              center=true);
         }
 
-        // M3 de bloqueo aro-brazo.
-        // Se mantiene dentro de la parte ancha.
-        lock_x = min(arm_tongue_l-arm_lock_offset, wide_end_x-1.5);
+        // Agujero M3 aro-brazo:
+        // CONSERVA la posición original, no se desplaza.
+        lock_x = arm_tongue_l - arm_lock_offset;
         translate([lock_x,0,0])
             cylinder(h=12,
                      d=arm_lock_hole,
                      center=true);
 
-        // M3 del pivote.
+        // Agujero M3 del pivote
         translate([pivot_x,0,arm_t/2])
             rotate([90,0,0])
                 cylinder(h=arm_pivot_ear_t+4,
                          d=arm_pivot_hole,
                          center=true);
 
-        // Canaleta de cable sólo en la sección ancha.
+        // Canaleta sobre la barra principal
         if(wide_len > 4)
             translate([wide_len/2,
                        0,
