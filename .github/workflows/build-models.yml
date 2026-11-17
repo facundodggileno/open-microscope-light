@@ -1,0 +1,52 @@
+name: Generate V0.20 printable STL and preview
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "cad/current/microscope_led_head_v020.scad"
+      - ".github/workflows/build-models.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install OpenSCAD and virtual display
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad xvfb
+      - name: Export final printable components
+        run: |
+          set -euo pipefail
+          mkdir -p cad/stl docs/photos
+          for part in ring arm pod; do
+            xvfb-run -a openscad -o "cad/stl/${part}_v020.stl" -D "part=\"${part}\"" cad/current/microscope_led_head_v020.scad
+            test -s "cad/stl/${part}_v020.stl"
+          done
+      - name: Render assembly preview
+        run: |
+          set -euo pipefail
+          xvfb-run -a openscad -o docs/photos/v020-assembly-preview.png -D 'part="assembly"' --imgsize=1200,900 --viewall --autocenter cad/current/microscope_led_head_v020.scad
+          test -s docs/photos/v020-assembly-preview.png
+      - name: Publish outputs to repository
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cad/stl/ docs/photos/v020-assembly-preview.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate printable STL set and CAD preview for V0.20"
+            git push origin HEAD:main
+          fi
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenMicroscope-Light-V0.20-STL
+          path: |
+            cad/stl/*.stl
+            docs/photos/v020-assembly-preview.png

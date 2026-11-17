@@ -1,0 +1,36 @@
+name: OpenSCAD CAD check
+on:
+  push:
+    paths:
+      - "cad/**"
+      - ".github/workflows/cad-check.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Verify source and export geometry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OpenSCAD
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad xvfb
+      - name: Export final revision (ring, arm, pod)
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/oml
+          for part in ring arm pod; do
+            xvfb-run -a openscad -o "/tmp/oml/${part}.stl" -D "part=\"${part}\"" cad/current/microscope_led_head_v020.scad
+            test -s "/tmp/oml/${part}.stl"
+          done
+      - name: Parse all historical OpenSCAD revisions
+        run: |
+          set -euo pipefail
+          for file in cad/history/*.scad; do
+            openscad -o /tmp/historical.csg "$file"
+          done
