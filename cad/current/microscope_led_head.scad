@@ -1,16 +1,15 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.8
+  Cabezal modular paramétrico V0.9
   OpenSCAD
 
-  Cambios V0.8:
+  Cambios V0.9:
   - 4 módulos LED nuevamente separados EXACTAMENTE 90°.
   - Fase angular configurable; default 45° -> 45/135/225/315°.
-  - Se restauran las guías/paredes del pod para que el disipador pueda
-    deslizarse dentro del alojamiento.
-  - Se elimina únicamente la protuberancia molesta alrededor de la
-    articulación pod-brazo.
+  - Pod restaurado al concepto original de bandeja deslizante.
+  - La horquilla M3 ahora se une por DEBAJO y DETRÁS de la bandeja.
+  - Se elimina por completo la protuberancia que invadía el pocket del disipador.
   - Los agujeros M4 de fijación siguen directamente en la pared del aro,
     sin bosses/guías salientes.
   - Encastres aro-brazo siguen abiertos hacia el exterior para permitir
@@ -247,22 +246,41 @@ module arm_part(){
 }
 
 // ============================================================
-// POD CON GUÍAS DESLIZANTES RESTAURADAS
+// POD V0.9 - BANDEJA DESLIZANTE ESTILO ORIGINAL, SIN PROTUBERANCIA INTERNA
 // ============================================================
 
 module pod_raw(){
-    fork_x = -pod_outer_l/2 - pod_pivot_ear_d/2 + 1.2;
+    /*
+      El disipador entra deslizando desde +X hacia -X.
+
+      La zona útil de deslizamiento queda completamente limpia:
+      - base plana
+      - dos guías laterales
+      - un tope trasero
+      - SIN puente/protuberancia dentro del pocket
+
+      La horquilla M3 se conecta por debajo y detrás de la bandeja.
+    */
+
+    // El tope trasero está en -X
+    back_x = -pod_outer_l/2 + pod_wall/2;
+
+    // Centro del eje de articulación, completamente detrás de la bandeja
+    fork_x = -pod_outer_l/2 - pod_pivot_ear_d/2 + 0.5;
 
     difference(){
         union(){
-            // Fondo/base donde se pega/apoya el disipador
+            // ------------------------------------------------
+            // 1. BASE PLANA DEL POD
+            // ------------------------------------------------
             cube([pod_outer_l,
                   pod_outer_w,
                   pod_back],
                  center=true);
 
-            // DOS GUÍAS LATERALES:
-            // permiten deslizar el disipador desde el frente.
+            // ------------------------------------------------
+            // 2. GUÍAS LATERALES PARA DESLIZAR EL DISIPADOR
+            // ------------------------------------------------
             for(s=[-1,1]){
                 translate([0,
                            s*(pocket_w/2 + pod_wall/2),
@@ -273,9 +291,10 @@ module pod_raw(){
                          center=true);
             }
 
-            // Tope trasero solamente.
-            // El frente queda completamente abierto para insertar el disipador.
-            translate([-pod_outer_l/2 + pod_wall/2,
+            // ------------------------------------------------
+            // 3. TOPE TRASERO
+            // ------------------------------------------------
+            translate([back_x,
                        0,
                        pod_rail_h/2])
                 cube([pod_wall,
@@ -283,7 +302,9 @@ module pod_raw(){
                       pod_rail_h],
                      center=true);
 
-            // Horquilla: dos orejas limpias
+            // ------------------------------------------------
+            // 4. HORQUILLA DEL PIVOTE
+            // ------------------------------------------------
             for(s=[-1,1]){
                 translate([fork_x,
                            s*(pod_fork_gap/2 + pod_fork_t/2),
@@ -294,31 +315,51 @@ module pod_raw(){
                                  center=true);
             }
 
-            // Cuello MÍNIMO entre horquilla y fondo.
-            // Queda detrás del tope y no invade el canal del disipador.
-            translate([-pod_outer_l/2 - pod_neck_l/2 + 0.8,
+            // ------------------------------------------------
+            // 5. SOPORTE INFERIOR DE LA HORQUILLA
+            // ------------------------------------------------
+            // Se coloca DEBAJO de la bandeja y detrás del tope.
+            // No sobresale dentro del espacio donde desliza el disipador.
+            support_len = pod_pivot_ear_d/2 + 4.0;
+            translate([-pod_outer_l/2 - support_len/2 + 1.0,
                        0,
-                       0])
-                cube([pod_neck_l,
+                       -pod_back/2 - 1.25])
+                cube([support_len,
                       pod_fork_gap + 2*pod_fork_t,
-                      pod_neck_h],
+                      2.5],
                      center=true);
+
+            // Dos pequeños nervios verticales exteriores conectan
+            // cada oreja con el soporte inferior.
+            for(s=[-1,1]){
+                translate([-pod_outer_l/2 - 1.0,
+                           s*(pod_fork_gap/2 + pod_fork_t/2),
+                           -0.7])
+                    cube([4.0,
+                          pod_fork_t,
+                          pod_back+2.5],
+                         center=true);
+            }
         }
 
-        // Agujeros del pivote M3
+        // ------------------------------------------------
+        // AGUJEROS M3 DE LA HORQUILLA
+        // ------------------------------------------------
         for(s=[-1,1]){
             translate([fork_x,
                        s*(pod_fork_gap/2 + pod_fork_t/2),
                        0])
                 rotate([90,0,0])
-                    cylinder(h=pod_fork_t+3,
+                    cylinder(h=pod_fork_t+4,
                              d=pod_pivot_hole,
                              center=true);
         }
 
-        // Paso de cable.
-        // Se coloca cerca del tope trasero y no genera protuberancias.
-        translate([-pod_outer_l/2 + 4.0,
+        // ------------------------------------------------
+        // PASO DE CABLE
+        // ------------------------------------------------
+        // Agujero en el tope trasero; no genera ninguna protuberancia.
+        translate([-pod_outer_l/2 + 3.0,
                    0,
                    0])
             rotate([0,90,0])
