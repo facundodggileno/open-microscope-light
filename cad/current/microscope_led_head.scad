@@ -1,7 +1,7 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.14
+  Cabezal modular paramétrico V0.15
   OpenSCAD
 
   Cambios V0.11:
@@ -28,9 +28,9 @@ $fn = 96;
 // ============================================================
 
 // Aro
-ring_id              = 103.0;
+ring_id              = 63.0;
 ring_wall_radial     = 10.0;
-ring_od              = ring_id + 2*ring_wall_radial;
+ring_od              = 123.0;   // fijo para conservar geometría exterior y agujeros de V0.14
 ring_h               = 8.0;
 
 // Tornillos radiales de fijación al microscopio
@@ -49,6 +49,7 @@ arm_angles           = [led_phase,
 cob_center_radius    = 68.0;
 pod_tilt             = 25.0;
 pod_drop             = 10.0;
+pod_radial_offset    = 5.0;      // compensa extensión +5 mm del pivote del brazo
 
 // Disipador
 heatsink_w           = 22.0;
@@ -367,14 +368,14 @@ module assembled(){
 
         color([0.10,0.10,0.12])
             radial(a,
-                   arm_pivot_r + exploded*1.5,
+                   arm_pivot_r + pod_radial_offset + exploded*1.5,
                    ring_h + arm_t/2 - pod_drop)
                 pod_part();
 
         // Disipador conceptual dentro del canal
         color([0.38,0.38,0.40,0.85])
             radial(a,
-                   cob_center_radius + exploded*1.8,
+                   cob_center_radius + pod_radial_offset + exploded*1.8,
                    ring_h - pod_drop + heatsink_h/2 + pod_back/2)
                 rotate([0,pod_tilt,0])
                     cube([heatsink_l,
@@ -385,7 +386,7 @@ module assembled(){
         // COB conceptual
         color([1.0,0.75,0.08])
             radial(a,
-                   cob_center_radius + exploded*1.8,
+                   cob_center_radius + pod_radial_offset + exploded*1.8,
                    ring_h - pod_drop + pod_back/2 + 0.8)
                 rotate([0,pod_tilt,0])
                     cube([13,13,1.0],
