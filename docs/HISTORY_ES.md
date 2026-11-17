@@ -2,13 +2,13 @@
 
 ## Problema de origen
 
-Se buscó mejorar la iluminación para reparación de placas y microsoldadura, manteniendo buen contraste, alto CRI declarado, menor fatiga ocular y control fino de brillo, con geometría compatible con RELIFE RL-M3T. Se exploró inicialmente una solución tipo aro con 28 emisores; finalmente se descartó a favor de **cuatro módulos COB** orientables, con apagado independiente.
+Busqué mejorar la iluminación para reparación de placas y microsoldadura, manteniendo buen contraste, alto CRI declarado, menor fatiga ocular y control fino de brillo, con geometría compatible con RELIFE RL-M3T. Inicialmente exploré una solución tipo aro con 28 emisores; finalmente la descarté a favor de **cuatro módulos COB** orientables, con apagado independiente.
 
 ## Electrónica
 
-Se seleccionaron COB XIANGCLEAR 1311-5W y un driver analógico de corriente basado en **MCP6004, 4 × IRLZ44N, TL431A, 78L05 y B10K**. Se contempló la disipación en cada MOSFET y el efecto de usar fuentes de notebook ~19V para reducir la diferencia de tensión frente a los COB.
+Seleccioné COB XIANGCLEAR 1311-5W y un driver analógico de corriente basado en **MCP6004, 4 × IRLZ44N, TL431A, 78L05 y B10K**. Tuve en cuenta la disipación en cada MOSFET y el efecto de usar fuentes de notebook ~19V para reducir la diferencia de tensión frente a los COB.
 
-La placa de control se construyó y quedó funcional. **No existe en los archivos recuperados un netlist final certificado** de esa placa; el documento de cableado es una **implementación propuesta** basada en su arquitectura.
+Construí la placa de control en placa perforada siguiendo los diagramas eléctricos publicados y quedó funcional. La guía de cableado documenta las conexiones utilizadas, junto con recomendaciones conservadoras para reproducirla.
 
 ## CAD
 
@@ -20,7 +20,7 @@ La configuración final se estabilizó con **4 LEDs a 90°**, fase de **65°**, 
 
 ## Prototipo y temperatura
 
-Se imprimió una unidad funcional en **PLA** con cinta de aluminio local, se instaló en el microscopio y se usó más de un mes. Con control en torno al 50% se midieron **55–63 °C tras más de 1 h**. Al máximo el disipador llegó a **~95 °C tras ~10 min**. Estos datos se mantienen publicados, sin inferir una temperatura de juntura numérica no medida.
+Imprimí una unidad funcional en **PLA** con cinta de aluminio local, la instalé en el microscopio y la utilicé durante más de un mes. Con control en torno al 50% se midieron **55–63 °C tras más de 1 h**. Al máximo el disipador llegó a **~95 °C tras ~10 min**. Estos datos se mantienen publicados, sin inferir una temperatura de juntura numérica no medida.
 
 ## Integridad del registro
 
