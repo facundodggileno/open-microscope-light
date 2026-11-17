@@ -6,6 +6,8 @@
 
 ![Prototipo real montado en el RELIFE RL-M3T](docs/photos/prototype-installed-relife-rl-m3t.jpg)
 
+[Detalle real de los módulos COB y disipadores](docs/photos/prototype-closeup.jpg)
+
 **Estado:** prototipo funcional, construido e instalado en un **RELIFE RL-M3T** y utilizado de forma estable durante más de un mes. El controlador analógico se montó en placa perforada. **Versión final mecánica del autor: V0.20.**
 
 > [!WARNING]
