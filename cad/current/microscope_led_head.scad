@@ -1,7 +1,7 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.18 - pod sin protuberancias
+  Cabezal modular paramétrico V0.19 - agujeros Barlow 3.2 mm
   OpenSCAD
 
   V0.16:
@@ -42,7 +42,7 @@ ring_h               = 8.0;
 
 // Tornillos radiales de fijación al microscopio
 scope_screw_angles   = [0,120,240];
-scope_screw_hole     = 4.4;     // M4 con holgura
+scope_screw_hole     = 3.2;     // V0.19: agujero más ajustado para tornillo ~M4 / Ø real ~3.7-3.8 mm
 scope_screw_length   = 23.0;
 
 // LEDs / brazos: SIEMPRE separados 90°
