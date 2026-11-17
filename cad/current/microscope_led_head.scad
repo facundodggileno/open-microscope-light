@@ -1,13 +1,13 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.10
+  Cabezal modular paramétrico V0.11
   OpenSCAD
 
-  Cambios V0.10:
-  - Se conserva todo el aro/brazos/geometría general de V0.9.
-  - Se usa el pod corregido de V0.6.1: hueco central, guías laterales y tope trasero.
-  - Se mantiene eliminada únicamente la protuberancia que interfería.
+  Cambios V0.11:
+  - BASE GENERAL: V0.9.
+  - POD: copia literal de V0.6.1, incluyendo TODOS sus parámetros asociados.
+  - El pod NO fue rediseñado ni reinterpretado.
   - 4 módulos LED nuevamente separados EXACTAMENTE 90°.
   - Fase angular configurable; default 45° -> 45/135/225/315°.
   - Pod restaurado al concepto original de bandeja deslizante.
@@ -53,8 +53,8 @@ pod_drop             = 10.0;
 // Disipador
 heatsink_w           = 22.0;
 heatsink_l           = 22.0;
-heatsink_h           = 13.0;    // editar si la medición final difiere
-heatsink_clearance   = 0.35;    // por lado
+heatsink_h           = 13.0;    // EDITAR si tu disipador real difiere
+heatsink_clearance   = 0.30;    // por lado
 pocket_w             = heatsink_w + 2*heatsink_clearance;
 pocket_l             = heatsink_l + 2*heatsink_clearance;
 
@@ -105,6 +105,14 @@ wire_channel_w       = 3.2;
 wire_channel_d       = 1.8;
 pod_wire_hole        = 4.0;
 
+pod_side_h           = 5.0;
+diffuser_enable      = true;
+diffuser_slot        = 1.2;
+diffuser_gap         = 5.0;
+fork_gap             = arm_pivot_ear_t + 0.35;
+fork_t               = 4.0;
+fork_hole            = 3.3;
+fork_outer_w         = fork_gap + 2*fork_t;
 // ============================================================
 // UTILIDADES
 // ============================================================
