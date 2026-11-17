@@ -1,7 +1,7 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.12
+  Cabezal modular paramétrico V0.13
   OpenSCAD
 
   Cambios V0.11:
@@ -78,8 +78,6 @@ arm_pivot_r          = 63.5;
 arm_pivot_hole       = 3.3;
 arm_pivot_ear_d      = 9.0;
 arm_pivot_ear_t      = 5.0;
-arm_pivot_neck_w     = 6.0;      // cuello central, menor que el diámetro del cilindro
-arm_pivot_clearance  = 0.8;      // cuerpo ancho termina antes del cilindro
 
 // Pod / bandeja deslizante
 pod_wall             = 2.4;
@@ -203,50 +201,40 @@ module ring_body(){
 
 module arm_part(){
     /*
-      V0.12 - corrección del extremo del brazo:
-      - el cuerpo rectangular ancho termina antes del cilindro;
-      - un único cuello central trasero une cuerpo y cilindro;
-      - el cuello es más angosto que el cilindro;
-      - las dos caras laterales del cilindro quedan libres para la horquilla del pod.
+      V0.13 - pivote corregido de forma simple.
+
+      Geometría:
+      [lengüeta/barra] -> [cuello central angosto] -> [cilindro M3]
+
+      El cilindro queda completamente libre por ambos laterales.
+      No hay brazos laterales, escalones ni geometría que lo envuelva.
     */
 
     base_r_local = ring_od/2 - arm_tongue_l + 1.0;
-    total_len = arm_pivot_r - base_r_local;
+    pivot_x = arm_pivot_r - base_r_local;
 
-    pivot_x = total_len;
-    pivot_r = arm_pivot_ear_d/2;
+    pivot_radius = arm_pivot_ear_d/2;
 
-    // El cuerpo ancho deja libre la zona lateral del cilindro.
-    wide_start_x = arm_tongue_l - 1.0;
-    wide_end_x   = pivot_x - pivot_r - arm_pivot_clearance;
-    wide_len     = max(3.0, wide_end_x - wide_start_x);
+    // La parte ancha termina 5 mm antes del centro del pivote.
+    // Eso deja un cuello central claramente visible.
+    neck_len = 5.0;
+    neck_w   = 5.0;
 
-    // Cuello central: entra por detrás del cilindro y no tapa sus laterales.
-    neck_start_x = wide_end_x - 0.2;
-    neck_end_x   = pivot_x;
-    neck_len     = neck_end_x - neck_start_x;
-    neck_w       = min(arm_pivot_neck_w, arm_pivot_ear_d - 1.0);
+    wide_end_x = pivot_x - neck_len;
+    wide_len   = max(3.0, wide_end_x);
 
     difference(){
         union(){
-            // Lengüeta de encastre en el aro
-            translate([arm_tongue_l/2,0,arm_tongue_t/2])
-                cube([arm_tongue_l,
+            // Parte principal recta del brazo.
+            // Conserva el ancho de la lengüeta de encastre.
+            translate([wide_len/2, 0, arm_tongue_t/2])
+                cube([wide_len,
                       arm_tongue_w,
                       arm_tongue_t],
                      center=true);
 
-            // Cuerpo principal ancho
-            translate([wide_start_x + wide_len/2,
-                       0,
-                       arm_t/2])
-                cube([wide_len,
-                      arm_w,
-                      arm_t],
-                     center=true);
-
-            // Único brazo/cuello central detrás del cilindro
-            translate([neck_start_x + neck_len/2,
+            // ÚNICO cuello central, desde atrás hasta el centro del cilindro.
+            translate([wide_end_x + neck_len/2,
                        0,
                        arm_t/2])
                 cube([neck_len,
@@ -254,7 +242,7 @@ module arm_part(){
                       arm_t],
                      center=true);
 
-            // Cilindro completo de articulación
+            // Cilindro completo y expuesto.
             translate([pivot_x,0,arm_t/2])
                 rotate([90,0,0])
                     cylinder(h=arm_pivot_ear_t,
@@ -262,25 +250,27 @@ module arm_part(){
                              center=true);
         }
 
-        // M3 de bloqueo aro-brazo
-        translate([arm_tongue_l-arm_lock_offset,0,0])
+        // M3 de bloqueo aro-brazo.
+        // Se mantiene dentro de la parte ancha.
+        lock_x = min(arm_tongue_l-arm_lock_offset, wide_end_x-1.5);
+        translate([lock_x,0,0])
             cylinder(h=12,
                      d=arm_lock_hole,
                      center=true);
 
-        // M3 del pivote pod-brazo
+        // M3 del pivote.
         translate([pivot_x,0,arm_t/2])
             rotate([90,0,0])
                 cylinder(h=arm_pivot_ear_t+4,
                          d=arm_pivot_hole,
                          center=true);
 
-        // Canaleta sólo sobre el cuerpo ancho
-        if (wide_len > 3)
-            translate([wide_start_x + wide_len/2,
+        // Canaleta de cable sólo en la sección ancha.
+        if(wide_len > 4)
+            translate([wide_len/2,
                        0,
-                       arm_t-wire_channel_d/2+0.05])
-                cube([max(3,wide_len-1),
+                       arm_tongue_t-wire_channel_d/2+0.05])
+                cube([max(3,wide_len-1.5),
                       wire_channel_w,
                       wire_channel_d+0.2],
                      center=true);
