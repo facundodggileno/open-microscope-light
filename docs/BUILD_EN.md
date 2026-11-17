@@ -1,6 +1,6 @@
 # OpenMicroscope Light — step-by-step build guide
 
-This project started as a working prototype for a **RELIFE RL-M3T** stereo microscope, using a 0.5× Barlow lens. The final author-validated head is **V0.20**. It has been used for **over one month** at normal brightness. The prototype was printed in PLA, but this does **not** certify it as safe for high-temperature continuous operation.
+This project started as a working prototype for a **RELIFE RL-M3T** stereo microscope, using a 0.5× Barlow lens. My final mechanical revision is **V0.20**. It has been used for **over one month** at normal brightness. The prototype was printed in PLA, but this does **not** certify it as safe for high-temperature continuous operation.
 
 ## What you need
 
@@ -39,7 +39,7 @@ Print **one ring, four arms and four pods**. Test-print one pod and check that i
 
 ## 4. Electronics
 
-Follow [WIRING_EN.md](../hardware/WIRING_EN.md), the pinout reference and the [first-power-up guide](COMMISSIONING.md). The published design is a **proposed reproducible electrical implementation**, not a measured as-built netlist for the author's functional perfboard.
+Follow [WIRING_EN.md](../hardware/WIRING_EN.md), the pinout reference and the [first-power-up guide](COMMISSIONING.md). I built my functional perfboard controller following the published electrical diagrams; check the connections and component values before powering your own build.
 
 Test **one current-limited channel at a time**. Begin around **190 mA** per COB, NOT at the original prototype's full-power region (~340–350 mA/channel). The MOSFET TO-220 tab is electrically tied to DRAIN.
 
