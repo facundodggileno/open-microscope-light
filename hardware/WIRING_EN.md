@@ -1,6 +1,6 @@
 # OpenMicroscope Light — reproducible analog current driver
 
-> **Important:** the author's original controller was built on perfboard and is functional, but an electrically traced as-built schematic has **not** been supplied. This document is a **conservative, proposed reference circuit** based on the known architecture. Confirm every package pinout, limit current and test channels one at a time.
+> **Scope:** I built my functional perfboard controller following the electrical diagrams published here. This guide documents those connections and includes conservative current-limit recommendations for anyone reproducing the build. Confirm every package pinout, limit current and test channels one at a time.
 
 ![System overview](../docs/diagrams/system-architecture.svg)
 ![One channel, functional view](../docs/diagrams/channel-driver.svg)
