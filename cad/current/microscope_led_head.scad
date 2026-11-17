@@ -1,8 +1,15 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.15
+  Cabezal modular paramétrico V0.16 - aro 63 mm recalculado
   OpenSCAD
+
+  V0.16:
+  - ring_id corregido a 63 mm.
+  - ring_od recalculado paramétricamente a 83 mm (pared radial 10 mm).
+  - agujeros M4 y encastres siguen al nuevo radio del aro.
+  - radios de pivote y COB recalculados para conservar proporciones.
+  - se mantiene brazo V0.14 (+5 mm) y pod V0.6.1.
 
   Cambios V0.11:
   - BASE GENERAL: V0.9.
@@ -30,7 +37,7 @@ $fn = 96;
 // Aro
 ring_id              = 63.0;
 ring_wall_radial     = 10.0;
-ring_od              = 123.0;   // fijo para conservar geometría exterior y agujeros de V0.14
+ring_od              = ring_id + 2*ring_wall_radial;
 ring_h               = 8.0;
 
 // Tornillos radiales de fijación al microscopio
@@ -46,10 +53,9 @@ arm_angles           = [led_phase,
                         led_phase+270];
 
 // Óptica
-cob_center_radius    = 68.0;
+cob_center_radius    = ring_od/2 + 6.5;   // 48.0 mm with ID63 / OD83
 pod_tilt             = 25.0;
 pod_drop             = 10.0;
-pod_radial_offset    = 5.0;      // compensa extensión +5 mm del pivote del brazo
 
 // Disipador
 heatsink_w           = 22.0;
@@ -75,7 +81,7 @@ arm_lock_offset      = 4.0;
 // Brazo
 arm_w                = 10.0;
 arm_t                = 5.0;
-arm_pivot_r          = 63.5;
+arm_pivot_r          = ring_od/2 + 2.0;   // preserves prior pivot offset from ring edge
 arm_pivot_hole       = 3.3;
 arm_pivot_ear_d      = 9.0;
 arm_pivot_ear_t      = 5.0;
@@ -368,14 +374,14 @@ module assembled(){
 
         color([0.10,0.10,0.12])
             radial(a,
-                   arm_pivot_r + pod_radial_offset + exploded*1.5,
+                   arm_pivot_r + 5.0 + exploded*1.5,
                    ring_h + arm_t/2 - pod_drop)
                 pod_part();
 
         // Disipador conceptual dentro del canal
         color([0.38,0.38,0.40,0.85])
             radial(a,
-                   cob_center_radius + pod_radial_offset + exploded*1.8,
+                   cob_center_radius + 5.0 + exploded*1.8,
                    ring_h - pod_drop + heatsink_h/2 + pod_back/2)
                 rotate([0,pod_tilt,0])
                     cube([heatsink_l,
@@ -386,7 +392,7 @@ module assembled(){
         // COB conceptual
         color([1.0,0.75,0.08])
             radial(a,
-                   cob_center_radius + pod_radial_offset + exploded*1.8,
+                   cob_center_radius + 5.0 + exploded*1.8,
                    ring_h - pod_drop + pod_back/2 + 0.8)
                 rotate([0,pod_tilt,0])
                     cube([13,13,1.0],
