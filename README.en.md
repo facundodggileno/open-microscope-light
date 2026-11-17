@@ -11,7 +11,9 @@
 
 [Close-up of LED heads and heatsinks](docs/photos/prototype-closeup.jpg)
 
-Open-source parametric microscope illuminator designed for electronics repair and microsoldering. It uses **four independently switchable COB LEDs** with analog current regulation (no intentionally applied LED PWM) and an articulated, 3D-printable four-pod head.
+Source-available, non-commercial parametric microscope illuminator designed for electronics repair and microsoldering. It uses **four independently switchable COB LEDs** with analog current regulation (no intentionally applied LED PWM) and an articulated, 3D-printable four-pod head.
+
+> **Copy and build, but do not sell without permission.** You can modify, reproduce and share covered design files for non-commercial purposes. Selling printed parts, kits, CAD files or assembled lights based on the current licensed materials requires separate written permission. Personally built lights may be used as tools in paid repair workshops. See [LICENSE](LICENSE) and [license transition](docs/LICENSE_TRANSITION.md); previous MIT grants are not retroactively revoked.
 
 **Build status:** a PLA prototype was assembled on a **RELIFE RL-M3T** stereo microscope and has been used successfully for **over one month**. The original controller is functional on perfboard; the published electronic schematic is a *reproducible reference design*, not an electrically traced copy of that specific board.
 
@@ -37,7 +39,7 @@ These are **reference circuit connections**; the as-built perfboard has not been
 
 **CAD archives:** [cad/history](cad/history/) and commit history. **Docs:** [build](docs/BUILD_ES.md), [electronics](hardware/WIRING_ES.md), [thermal tests](docs/THERMAL_TESTS.md), [CAD](docs/CAD_GUIDE.md).
 
-Author: PC Service Computación / [facundodggileno](https://github.com/facundodggileno). MIT-licensed experimental DIY project, without warranty.
+Author: PC Service Computación / [facundodggileno](https://github.com/facundodggileno). new releases licensed under CC BY-NC-SA 4.0 for covered material; no commercial sale without separate permission. Prior MIT releases retain their licensing history. Experimental DIY project, without warranty. [License](LICENSE) · [Transition](docs/LICENSE_TRANSITION.md).
 
 ## Original-resolution development images
 

@@ -1,21 +1,78 @@
-MIT License
-
+OpenMicroscope Light — NON-COMMERCIAL LICENSE NOTICE
+Effective for the current publication: 2026-11-17
 Copyright (c) 2026 PC Service Computación / facundodggileno
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+LICENSE CHOSEN FOR NEW PUBLICATIONS
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+The original copyrightable project materials newly distributed in this
+repository from the effective date are offered under:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+(CC BY-NC-SA 4.0)
+
+Legally binding terms:
+https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en
+
+Plain-language summary:
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+This license permits reproduction, adaptation and sharing of covered
+materials for NonCommercial purposes, subject to attribution, indication of
+modifications and ShareAlike conditions.
+
+NO COMMERCIAL LICENSE IS GRANTED BY THIS PUBLICATION
+
+No permission for commercial exploitation is intended or granted in this
+current release. For example, the author requests a separate written
+agreement before selling or commercially distributing:
+
+- STL/OpenSCAD/CAD source files and paid access to derivative design files.
+- Printed rings, arms, pods and other mechanical parts made from this design.
+- Electronic kits, boards or bundled components marketed as this project.
+- Completed OpenMicroscope Light devices or copies offered for sale.
+
+This statement explains the author's commercial licensing intentions and
+does not alter the standard CC BY-NC-SA 4.0 legal code. Legal protection
+of physical functional devices may involve rules different from copyright
+protection of drawings/files and may vary by jurisdiction.
+
+ADDITIONAL EXPRESS PERMISSION FROM THE AUTHOR
+
+Individuals may fabricate and operate their own copies for personal,
+educational, research and workshop use, INCLUDING the use of a self-built
+light as a tool while providing paid electronics repair services. This
+additional authorization does NOT authorize manufacturing for resale,
+selling copies, selling kits or charging for project design files.
+
+To request commercial permission, open an issue in this GitHub repository
+titled "Commercial license request" and describe the intended activity.
+Only the copyright/rightsholder can grant permission for rights they own;
+a GitHub issue is a request, NOT an authorization.
+
+PREVIOUS MIT-LICENSED RELEASES
+
+Previously published copies/revisions of this repository were released
+under the MIT License, which included permission for commercial use. Their
+existing license rights are not automatically revoked by this change.
+This new notice applies prospectively to new releases; historical commits
+retain their prior licensing history. See LICENSES/LEGACY-MIT.md and
+docs/LICENSE_TRANSITION.md. Do not represent the change as retroactively
+prohibiting use or sale permitted under existing MIT grants.
+
+THIRD-PARTY MATERIALS
+
+This notice only applies to rights that PC Service Computación /
+facundodggileno actually owns or is authorized to license. Trademarks,
+hardware components, datasheets and other third-party materials remain
+subject to their owners' rights and any existing license notices.
+
+DISCLAIMER
+
+THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND TO THE
+EXTENT PERMITTED BY APPLICABLE LAW. Construction and use are at the user's
+own risk, including electrical, optical and thermal safety.
+
+NOTE: CC licenses focus on copyrightable materials; Creative Commons does
+not recommend its licenses as a comprehensive license for software or
+physical hardware. Seek legal advice if you need a reliable restriction on
+commercial production of physical products in a specific jurisdiction.

@@ -20,3 +20,17 @@ La rama main conserva las revisiones CAD como **commits reconstruidos a partir d
 Las versiones iniciales de 103 mm no son medidas correctas del montaje real. **Usar V0.20 para construir** y verificar dimensiones en tu microscopio; las anteriores son para comprender la evolución.
 
 Revisiones eléctricas: la propuesta evolucionó desde explorar arrays de LED de alto CRI hacia **4 COB con corriente lineal independiente**; se ensayó la electrónica en placa perforada y se conservan los datos térmicos. La implementación de referencia documentada en [hardware/WIRING_ES.md](hardware/WIRING_ES.md) no pretende reproducir un netlist no relevado de esa placa.
+## 2026-11-17 — Cambio de licencia de distribución
+
+- El titular adopta **CC BY-NC-SA 4.0 para nuevas publicaciones** de los
+  materiales originales protegibles por derechos de autor.
+- La fabricación para uso propio y las modificaciones no comerciales siguen
+  admitidas. Se solicita autorización separada antes de comercializar partes,
+  kits o equipos basados en esta publicación.
+- Se mantiene expresamente permitido utilizar una unidad fabricada por uno
+  mismo como herramienta en trabajos de reparación remunerados.
+- Las copias previamente distribuidas bajo MIT **conservan los derechos**
+  concedidos por los términos que acompañaban aquellas versiones.
+- Documentación legal en [LICENSE](LICENSE),
+  [LICENSE_TRANSITION](docs/LICENSE_TRANSITION.md) y
+  [LEGACY-MIT](LICENSES/LEGACY-MIT.md).

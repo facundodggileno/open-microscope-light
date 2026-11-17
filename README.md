@@ -13,6 +13,8 @@
 
 [Detalle de los módulos COB y disipadores — recorte en alta calidad](docs/photos/prototype-closeup.jpg)
 
+> **Licencia para construir y compartir, no para vender:** podés copiar, modificar e imprimir el proyecto para uso propio. **No se autoriza la venta comercial de diseños, piezas impresas, kits o luces terminadas bajo la nueva publicación sin un acuerdo escrito.** Usar tu propia luz para trabajar en un taller de reparación está expresamente permitido. [Licencia y excepciones](LICENSE) · [Historial MIT y alcance legal](docs/LICENSE_TRANSITION.md).
+
 **Estado:** prototipo funcional, construido e instalado en un **RELIFE RL-M3T** y utilizado de forma estable durante más de un mes. El controlador analógico se montó en placa perforada. **Versión final mecánica del autor: V0.20.**
 
 > [!WARNING]
@@ -103,4 +105,4 @@ Diagramas editables: [arquitectura](docs/diagrams/system-architecture.mmd), [can
 - [Parámetros y exportación CAD](docs/CAD_GUIDE.md)
 - [Fotografía real del montaje](docs/photos/prototype-installed-relife-rl-m3t.jpg) · [Fotografías y recursos originales](docs/photos/README.md)
 
-**Autor del prototipo:** PC Service Computación / [facundodggileno](https://github.com/facundodggileno). Proyecto DIY experimental, sin garantía. **Licencia del contenido aquí publicado: MIT** (ver [LICENSE](LICENSE)).
+**Autor del prototipo:** PC Service Computación / [facundodggileno](https://github.com/facundodggileno). Proyecto DIY experimental, sin garantía. **Licencia actual: CC BY-NC-SA 4.0 (uso no comercial).** Para vender partes impresas, kits o luces terminadas a partir del diseño, solicitá autorización por escrito. [Condiciones](LICENSE) · [Uso comercial y transición desde MIT](docs/LICENSE_TRANSITION.md).
