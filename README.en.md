@@ -2,7 +2,12 @@
 
 [Español](README.md) · [Build guide](docs/BUILD_ES.md) · [Reference wiring](hardware/WIRING_ES.md) · [BOM](bom/BOM.csv)
 
-![Working prototype on RELIFE RL-M3T](docs/photos/prototype-installed-relife-rl-m3t.jpg)
+<p align="center">
+  <a href="docs/photos/prototype-installed-relife-rl-m3t.jpg">
+    <img src="docs/photos/prototype-installed-relife-rl-m3t.jpg" alt="OpenMicroscope Light installed on RELIFE RL-M3T" width="240">
+  </a>
+</p>
+<p align="center"><sub>Working prototype · click the image for full resolution</sub></p>
 
 [Close-up of LED heads and heatsinks](docs/photos/prototype-closeup.jpg)
 

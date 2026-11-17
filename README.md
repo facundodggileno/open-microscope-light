@@ -4,7 +4,12 @@
 
 [English](README.en.md) · [Construcción](docs/BUILD_ES.md) · [Electrónica](hardware/WIRING_ES.md) · [BOM](bom/BOM.csv) · [Historial](CHANGELOG.md)
 
-![Prototipo real montado en el RELIFE RL-M3T — fotografía original 900×1600](docs/photos/prototype-installed-relife-rl-m3t.jpg)
+<p align="center">
+  <a href="docs/photos/prototype-installed-relife-rl-m3t.jpg">
+    <img src="docs/photos/prototype-installed-relife-rl-m3t.jpg" alt="OpenMicroscope Light instalado en RELIFE RL-M3T" width="240">
+  </a>
+</p>
+<p align="center"><sub>Fotografía del prototipo · clic para verla en tamaño completo</sub></p>
 
 [Detalle de los módulos COB y disipadores — recorte en alta calidad](docs/photos/prototype-closeup.jpg)
 
