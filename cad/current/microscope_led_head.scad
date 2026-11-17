@@ -1,7 +1,7 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.16 - aro 63 mm recalculado
+  Cabezal modular paramétrico V0.17 - horquilla pod corregida
   OpenSCAD
 
   V0.16:
@@ -283,72 +283,113 @@ module arm_part(){
 
 module pod_tray(){
     /*
-      Sistema local:
-      - X = radial hacia afuera
-      - Y = tangencial
-      - Z = vertical
-      - cara del LED apunta aproximadamente hacia -Z,
-        inclinada pod_tilt hacia -X (centro del microscopio).
+      V0.17 - horquilla corregida.
+
+      - Mantiene la bandeja deslizante original.
+      - Mantiene el hueco central del fondo.
+      - Mantiene las guías laterales.
+      - Los dos cilindros laterales forman una horquilla real.
+      - El espacio central entre ambos cilindros queda completamente libre
+        para que entre el cilindro del brazo.
+      - No existe ninguna protuberancia que una ambos lados atravesando el centro.
     */
+
+    fork_x = -pod_outer_l/2 + 4.5;
 
     difference(){
         union(){
-            // Bandeja / respaldo
+            // Fondo de la bandeja
             translate([6,0,0])
                 cube([pod_outer_l, pod_outer_w, pod_back], center=true);
 
-            // Labios laterales de retención del disipador
+            // Guías laterales del disipador
             for(s=[-1,1]){
-                translate([6, s*(pocket_w/2 + pod_wall/2), pod_side_h/2])
-                    cube([pod_outer_l, pod_wall, pod_side_h], center=true);
+                translate([6,
+                           s*(pocket_w/2 + pod_wall/2),
+                           pod_side_h/2])
+                    cube([pod_outer_l,
+                          pod_wall,
+                          pod_side_h],
+                         center=true);
             }
 
-            // Labio posterior
-            translate([6 + pod_outer_l/2 - pod_wall/2,0,pod_side_h/2])
-                cube([pod_wall, pod_outer_w, pod_side_h], center=true);
+            // Tope trasero
+            translate([6 + pod_outer_l/2 - pod_wall/2,
+                       0,
+                       pod_side_h/2])
+                cube([pod_wall,
+                      pod_outer_w,
+                      pod_side_h],
+                     center=true);
 
-            // Horquilla doble del pivote en el lado interior
+            // DOS orejas independientes
             for(s=[-1,1]){
-                translate([-pod_outer_l/2 + 4.5,
+                // cilindro de articulación
+                translate([fork_x,
                            s*(fork_gap/2 + fork_t/2),
                            1.5])
                     rotate([90,0,0])
                         cylinder(h=fork_t,
                                  d=9.0,
                                  center=true);
-            }
 
-            // V0.6 corregida:
-            // Se eliminó el puente de unión horquilla-bandeja que sobresalía
-            // dentro de la zona útil del pod e interfería con el montaje.
-            // La horquilla queda unida por sus propias orejas al cuerpo del pod.
+                // cuello individual de cada oreja hacia la bandeja
+                translate([fork_x + 3.5,
+                           s*(fork_gap/2 + fork_t/2),
+                           1.5])
+                    cube([7.0,
+                          fork_t,
+                          5.0],
+                         center=true);
+            }
         }
 
-        // Hueco central para reducir plástico detrás del disipador
+        // Hueco central del fondo
         translate([6,0,-0.2])
-            cube([pocket_l-4, pocket_w-4, pod_back+1], center=true);
+            cube([pocket_l-4,
+                  pocket_w-4,
+                  pod_back+1],
+                 center=true);
 
-        // Agujeros M3 de la horquilla
+        // Agujeros M3
         for(s=[-1,1]){
-            translate([-pod_outer_l/2 + 4.5,
+            translate([fork_x,
                        s*(fork_gap/2 + fork_t/2),
                        1.5])
                 rotate([90,0,0])
-                    cylinder(h=fork_t+3, d=fork_hole, center=true);
+                    cylinder(h=fork_t+3,
+                             d=fork_hole,
+                             center=true);
         }
 
         // Paso de cable
         translate([6 + pod_outer_l/2 - 3,0,2.5])
             rotate([0,90,0])
-                cylinder(h=8, d=pod_wire_hole, center=true);
+                cylinder(h=8,
+                         d=pod_wire_hole,
+                         center=true);
 
-        // Ranura opcional para difusor en el frente
+        // Ranura de difusor opcional
         if(diffuser_enable){
             translate([6 - pod_outer_l/2 + diffuser_gap,0,-0.1])
-                cube([diffuser_slot, pocket_w+1.0, pod_back+2], center=true);
+                cube([diffuser_slot,
+                      pocket_w+1.0,
+                      pod_back+2],
+                     center=true);
         }
+
+        // Limpieza explícita del espacio central de la horquilla
+        // para que el cilindro del brazo entre entre las dos orejas.
+        translate([fork_x + 2.0,
+                   0,
+                   1.5])
+            cube([12.0,
+                  fork_gap,
+                  12.0],
+                 center=true);
     }
 }
+
 
 module pod_part(){
     rotate([0,pod_tilt,0])
