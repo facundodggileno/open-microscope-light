@@ -33,7 +33,7 @@ jobs:
           set -euo pipefail
           xvfb-run -a openscad -o docs/photos/v020-assembly-preview.png -D 'part="assembly"' --imgsize=1200,900 --viewall --autocenter cad/current/microscope_led_head_v020.scad
           test -s docs/photos/v020-assembly-preview.png
-      - name: Publish outputs to repository
+      - name: Publish outputs to repository (retry on concurrent updates)
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -41,7 +41,19 @@ jobs:
           git add cad/stl/ docs/photos/v020-assembly-preview.png
           if ! git diff --cached --quiet; then
             git commit -m "Generate printable STL set and CAD preview for V0.20"
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo "Generated files published."
+                break
+              fi
+              if [ "$attempt" -eq 5 ]; then
+                echo "Push rejected after five attempts." >&2
+                exit 1
+              fi
+              sleep 2
+            done
           fi
       - name: Upload backup artifact
         uses: actions/upload-artifact@v4
