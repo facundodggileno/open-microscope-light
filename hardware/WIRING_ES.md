@@ -4,6 +4,8 @@
 
 ## Diagramas de conexiones reproducibles
 
+La [lámina eléctrica histórica original](../docs/historical/historical-electrical-poster-original.png) está archivada por trazabilidad. **No utilizarla como plano definitivo**: el esquema de referencia detallado a continuación reemplaza sus valores exploratorios.
+
 ![Conexiones de los cuatro canales](../docs/diagrams/electrical-wiring-four-channels.svg)
 
 ![Cableado de un canal y asignación de pines](../docs/diagrams/electrical-channel-and-pinout.svg)

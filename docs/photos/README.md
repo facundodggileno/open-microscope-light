@@ -1,9 +1,21 @@
-# Fotografías del prototipo
+# Fotografías originales y material visual
 
-![Prototipo funcional montado en el RELIFE RL-M3T](prototype-installed-relife-rl-m3t.jpg)
+## Montaje real — fotografía original 900 × 1600
 
-![Detalle real de los cuatro pods y disipadores](prototype-closeup.jpg)
+![Prototipo funcional montado en RELIFE RL-M3T](prototype-installed-relife-rl-m3t.jpg)
 
-**Fotografías reales proporcionadas por el autor.** La imagen original del montaje tiene resolución de 900 × 1600 px. La versión actualmente publicada en GitHub está reducida; está pendiente sustituirla por el archivo original. Para imágenes de diagramas eléctricos en alta definición, consultar la sección de conexiones en el README o [los esquemas SVG](../diagrams/electrical-wiring-four-channels.svg), escalables sin pérdida. También se publica un render CAD generado automáticamente por GitHub Actions en **v020-assembly-preview.png**.
+[Ver foto original completa](prototype-installed-relife-rl-m3t.jpg)
 
-El prototipo en PLA tiene más de un mes de uso estable. Esto no invalida la advertencia sobre los 95 °C medidos al máximo.
+## Detalle del cabezal
+
+![Detalle de módulos LED y disipadores](prototype-closeup.jpg)
+
+[Ver recorte en resolución completa](prototype-closeup.jpg)
+
+Las fotografías proceden del montaje físico del autor. La vista `v020-assembly-preview.png` se genera automáticamente desde OpenSCAD.
+
+## Diagramas eléctricos de conexiones
+
+Los [diagramas SVG de los cuatro canales](../diagrams/electrical-wiring-four-channels.svg) y [de un canal con pinout](../diagrams/electrical-channel-and-pinout.svg) son **vectoriales y escalables**, sin borrosidad por ampliación.
+
+La [lámina de conexiones histórica original](../historical/historical-electrical-poster-original.png) es un diseño anterior: **no usar para fabricar sin revisar los valores y las conexiones** del [circuito de referencia](../../hardware/WIRING_ES.md).

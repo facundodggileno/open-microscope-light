@@ -4,9 +4,9 @@
 
 [English](README.en.md) · [Construcción](docs/BUILD_ES.md) · [Electrónica](hardware/WIRING_ES.md) · [BOM](bom/BOM.csv) · [Historial](CHANGELOG.md)
 
-![Prototipo real montado en el RELIFE RL-M3T](docs/photos/prototype-installed-relife-rl-m3t.jpg)
+![Prototipo real montado en el RELIFE RL-M3T — fotografía original 900×1600](docs/photos/prototype-installed-relife-rl-m3t.jpg)
 
-[Detalle real de los módulos COB y disipadores](docs/photos/prototype-closeup.jpg)
+[Detalle de los módulos COB y disipadores — recorte en alta calidad](docs/photos/prototype-closeup.jpg)
 
 **Estado:** prototipo funcional, construido e instalado en un **RELIFE RL-M3T** y utilizado de forma estable durante más de un mes. El controlador analógico se montó en placa perforada. **Versión final mecánica del autor: V0.20.**
 
@@ -57,6 +57,14 @@ El archivo principal es **[cad/current/microscope_led_head_v020.scad](cad/curren
 ![Conexiones de los cuatro COB, MOSFET y MCP6004](docs/diagrams/electrical-wiring-four-channels.svg)
 
 **[Ampliar diagrama completo de los cuatro canales](docs/diagrams/electrical-wiring-four-channels.svg)** · **[Conexiones de un canal y pinout](docs/diagrams/electrical-channel-and-pinout.svg)** · [Cableado por pin y valores](hardware/WIRING_ES.md)
+
+## Láminas originales del desarrollo
+
+Las siguientes imágenes originales se conservan a **resolución completa**. La primera corresponde a una **propuesta eléctrica histórica**: contiene valores y conexiones de una etapa anterior, **no debe usarse para cablear sin revisar el esquema de referencia vigente**.
+
+[![Lámina histórica de conexiones eléctricas — imagen original](docs/historical/historical-electrical-poster-original.png)](docs/historical/historical-electrical-poster-original.png)
+
+[![Ilustración original del diseño mecánico](docs/historical/microscope-mechanical-concept-original.png)](docs/historical/microscope-mechanical-concept-original.png)
 
 ## Diagrama del sistema
 

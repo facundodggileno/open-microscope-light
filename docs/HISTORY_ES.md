@@ -27,3 +27,7 @@ Se imprimió una unidad funcional en **PLA** con cinta de aluminio local, se ins
 Los commits de versiones de este repositorio fueron creados **durante la publicación** al importar snapshots originales. No deben interpretarse como las fechas originales de diseño. Los .scad históricos disponibles empiezan en **V0.6**, no hay archivos encontrados con nombres V0.1–V0.5. Se conserva cada archivo de revisión recuperado en [cad/history](../cad/history/).
 
 Las ilustraciones antiguas se consideran históricas, y no constituyen esquemas de cableado auditados.
+
+## Material gráfico original
+
+Se han incorporado las imágenes originales sin remuestreo, incluyendo la [lámina eléctrica histórica 1536 × 1024](historical/historical-electrical-poster-original.png) y la [ilustración mecánica 1448 × 1086](historical/microscope-mechanical-concept-original.png). La lámina eléctrica es material de exploración, **no un plano verificado de la placa final**. La fotografía real del montaje se publicó con sus **900 × 1600 píxeles** originales.

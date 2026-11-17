@@ -34,6 +34,10 @@ These are **reference circuit connections**; the as-built perfboard has not been
 
 Author: PC Service Computación / [facundodggileno](https://github.com/facundodggileno). MIT-licensed experimental DIY project, without warranty.
 
+## Original-resolution development images
+
+[Historical electrical connection concept — original PNG](docs/historical/historical-electrical-poster-original.png) (**superseded design; not a validated wiring schematic**). [Historical mechanical concept — original PNG](docs/historical/microscope-mechanical-concept-original.png). The installed microscope photograph is now uploaded at its original 900 × 1600 resolution.
+
 ## In-depth English documentation
 
 - [Detailed build and assembly guide](docs/BUILD_EN.md)
