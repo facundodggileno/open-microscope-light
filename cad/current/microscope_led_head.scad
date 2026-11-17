@@ -1,7 +1,7 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.17 - horquilla pod corregida
+  Cabezal modular paramétrico V0.18 - pod sin protuberancias
   OpenSCAD
 
   V0.16:
@@ -333,14 +333,9 @@ module pod_tray(){
                                  d=9.0,
                                  center=true);
 
-                // cuello individual de cada oreja hacia la bandeja
-                translate([fork_x + 3.5,
-                           s*(fork_gap/2 + fork_t/2),
-                           1.5])
-                    cube([7.0,
-                          fork_t,
-                          5.0],
-                         center=true);
+                // V0.18: sin cuello/protuberancia rectangular.
+                // Se deja únicamente el cilindro lateral de la horquilla
+                // para no invadir el canal del disipador.
             }
         }
 
