@@ -12,7 +12,13 @@
 - Un potenciómetro **B10K compartido** determina el ajuste y cuatro interruptores SPST habilitan cada canal por separado.
 - No hay modulación PWM intencional. Ruido óptico del adaptador o la electrónica **no fue cuantificado** con fotodiodo.
 
-[Diagrama general](../docs/diagrams/system-architecture.mmd) · [Canal](../docs/diagrams/channel-driver.mmd) · [Referencia y potenciómetro](../docs/diagrams/reference-dimming.mmd)
+![Arquitectura del sistema](../docs/diagrams/system-architecture.svg)
+
+![Canal de corriente](../docs/diagrams/channel-driver.svg)
+
+![Referencia y dimming](../docs/diagrams/reference-dimming.svg)
+
+Archivos fuente editables: [arquitectura](../docs/diagrams/system-architecture.mmd) · [canal](../docs/diagrams/channel-driver.mmd) · [referencia](../docs/diagrams/reference-dimming.mmd)
 
 ## Cableado de un canal
 

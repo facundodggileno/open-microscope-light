@@ -52,6 +52,8 @@ El archivo principal es **[cad/current/microscope_led_head_v020.scad](cad/curren
 
 ## Diagrama del sistema
 
+![Diagrama general de arquitectura](docs/diagrams/system-architecture.svg)
+
 ~~~mermaid
 flowchart LR
   PSU["Fuente aislada 19 V DC"] --> PROT["Protección + filtrado"]
