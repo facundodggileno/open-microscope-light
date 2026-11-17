@@ -1,21 +1,15 @@
-# Fotografías originales y material visual
+# Fotografías del prototipo
 
-## Montaje real — fotografía original 900 × 1600
+## Presentación con fondo ordenado
 
-![Prototipo funcional montado en RELIFE RL-M3T](prototype-installed-relife-rl-m3t.jpg)
+![Prototipo RELIFE RL-M3T con iluminación de cuatro COB, fotografía retocada](prototype-installed-relife-rl-m3t.jpg)
 
-[Ver foto original completa](prototype-installed-relife-rl-m3t.jpg)
+La imagen principal **ha sido editada para limpiar el fondo**. Es una fotografía de presentación del montaje real; la edición del entorno no modifica la documentación técnica. La versión publicada es una exportación JPEG de alta calidad de **941 × 1672 px** a partir de la imagen editada por el autor.
 
-## Detalle del cabezal
+## Documentación adicional
 
-![Detalle de módulos LED y disipadores](prototype-closeup.jpg)
+![Detalle de los cuatro pods y disipadores](prototype-closeup.jpg)
 
-[Ver recorte en resolución completa](prototype-closeup.jpg)
+[Vista del ensamblaje CAD V0.20](v020-assembly-preview.png) · [Diagramas de conexiones eléctricas](../diagrams/electrical-wiring-four-channels.svg)
 
-Las fotografías proceden del montaje físico del autor. La vista `v020-assembly-preview.png` se genera automáticamente desde OpenSCAD.
-
-## Diagramas eléctricos de conexiones
-
-Los [diagramas SVG de los cuatro canales](../diagrams/electrical-wiring-four-channels.svg) y [de un canal con pinout](../diagrams/electrical-channel-and-pinout.svg) son **vectoriales y escalables**, sin borrosidad por ampliación.
-
-La [lámina de conexiones histórica original](../historical/historical-electrical-poster-original.png) es un diseño anterior: **no usar para fabricar sin revisar los valores y las conexiones** del [circuito de referencia](../../hardware/WIRING_ES.md).
+Los modelos CAD, los STL y los ensayos térmicos deben consultarse en sus carpetas específicas; la imagen editada no sustituye las pruebas de fabricación.
