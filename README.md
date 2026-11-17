@@ -15,21 +15,21 @@
 
 > **Licencia para construir y compartir, no para vender:** podés copiar, modificar e imprimir el proyecto para uso propio. **No se autoriza la venta comercial de diseños, piezas impresas, kits o luces terminadas bajo la nueva publicación sin un acuerdo escrito.** Usar tu propia luz para trabajar en un taller de reparación está expresamente permitido. [Licencia y excepciones](LICENSE) · [Historial MIT y alcance legal](docs/LICENSE_TRANSITION.md).
 
-**Estado:** prototipo funcional, construido e instalado en un **RELIFE RL-M3T** y utilizado de forma estable durante más de un mes. El controlador analógico se montó en placa perforada. **Versión final mecánica del autor: V0.20.**
+**Estado:** prototipo funcional, construido e instalado en un **RELIFE RL-M3T** y utilizado de forma estable durante más de un mes. El controlador analógico se montó en placa perforada. **Versión mecánica final: V0.20.**
 
 > [!WARNING]
 > **Límite térmico observado:** con la perilla a ~50%, después de más de una hora los disipadores midieron **55–63 °C**. Al 100%, llegaron a **~95 °C tras ~10 minutos**. La primera impresión fue en PLA con cinta de aluminio en zonas de apoyo, pero eso **no constituye aislamiento térmico ni validación de seguridad**. No se recomienda 100% continuo con esos disipadores. Para la versión definitiva se consideran ABS/ASA o policarbonato **y una evaluación térmica adicional**. Cambiar el plástico no enfría por sí solo la juntura del LED.
 
-## Qué construimos
+## Qué construí
 
 - Cuatro módulos COB **XIANGCLEAR 1311-5W** (~6000 K / Ra95 según vendedor, sin medición espectral independiente).
 - Cuatro canales con **encendido individual** y ajuste compartido de brillo.
 - Regulación de corriente **lineal sin PWM intencional**: MCP6004 + IRLZ44N + resistencias de sensado.
 - Un aro sujeto con **tres tornillos radiales**, cuatro brazos y cuatro pods articulados con pivotes M3.
 - Disipadores de aluminio nominales de **22 × 22 × 13 mm**; acceso por rieles deslizantes.
-- Código fuente OpenSCAD histórico, guía, lista de materiales, diagramas y referencia eléctrica.
+- Código fuente OpenSCAD histórico, guía, lista de materiales y diagramas del circuito utilizado.
 
-> La ausencia de PWM de control **no certifica flicker cero**: eso requeriría medir la luz con fotodiodo y osciloscopio. El esquema electrónico publicado es una **implementación de referencia reproducible**, no un netlist levantado directamente de la placa real del autor.
+> La ausencia de PWM de control **no certifica flicker cero**: eso requeriría medir la luz con fotodiodo y osciloscopio. Los diagramas eléctricos publicados documentan las conexiones que seguí para construir mi placa de control. La ausencia de PWM no implica por sí sola ausencia de flicker medible.
 
 ## Ensamble y geometría final
 
@@ -53,13 +53,13 @@ El archivo principal es **[cad/current/microscope_led_head_v020.scad](cad/curren
 2. Abrí [V0.20 en OpenSCAD](cad/current/microscope_led_head_v020.scad), adaptá el diámetro, holguras, tornillos y alojamiento del disipador. Elegí la variable **part**: **ring**, **arm**, **pod** o **print_plate**. Exportá cada STL (F6 → Export as STL).
 3. Imprimí **1 aro, 4 brazos y 4 pods**. Proba primero un pod, sus guías y la articulación M3. Considerá ABS, ASA o PC adecuados a tu impresora para la pieza definitiva; no supongas que la temperatura del soporte es idéntica a la del disipador.
 4. Prepará 4 COB y 4 disipadores con interfaz térmica adecuada; cableá los COB con alivio de tensión y sin interferir con los pivotes.
-5. Construí y ensayá la [referencia electrónica de cuatro canales](hardware/WIRING_ES.md) con fuente de notebook aislada de alrededor de 19V. **Empezá con límite de corriente conservador (~190 mA por canal)**, no con la corriente máxima ensayada de ~340–350 mA.
+5. Construí y ensayá el [circuito electrónico de cuatro canales](hardware/WIRING_ES.md) con fuente de notebook aislada de alrededor de 19V. **Empezá con límite de corriente conservador (~190 mA por canal)**, no con la corriente máxima ensayada de ~340–350 mA.
 6. Verificá alimentación, polaridad, corrientes, aislamiento del tab de los MOSFET y temperatura según la [puesta en marcha](docs/COMMISSIONING.md).
 7. Ajustá los ángulos mirando una PCB real; apagá COB individuales para inspeccionar soldaduras y evitar reflejos especulares.
 
 ## Diagramas de conexión eléctrica (4 canales)
 
-**Estos son los esquemas de cableado del proyecto, no diagramas de bloques genéricos.** Muestran las conexiones de los COB, los IRLZ44N, las resistencias de sensado, los cuatro amplificadores MCP6004, las entradas de control y la alimentación. Se ofrecen como una **implementación eléctrica de referencia**; no se dispone del cableado exacto verificado de la placa perforada del prototipo.
+**Estos son los esquemas de cableado que utilicé para construir el controlador, no diagramas de bloques genéricos.** Muestran las conexiones de los COB, los IRLZ44N, las resistencias de sensado, los cuatro amplificadores MCP6004, las entradas de control y la alimentación. Son los diagramas que seguí para construir la placa perforada de mi prototipo.
 
 ![Conexiones de los cuatro COB, MOSFET y MCP6004](docs/diagrams/electrical-wiring-four-channels.svg)
 
