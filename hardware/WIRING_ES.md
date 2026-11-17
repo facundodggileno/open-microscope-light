@@ -1,6 +1,6 @@
-# Electrónica reproducible — cuatro canales de corriente lineal
+# Electrónica del prototipo — cuatro canales de corriente lineal
 
-> **Alcance del documento:** el controlador construido por el autor funciona, pero no se dispone de un netlist final relevado cable por cable ni de un PCB fabricable. Este esquema es una **implementación de referencia** basada en la arquitectura comprobada; los valores de polarización se eligieron conservadores para una primera reproducción. Medí y probá cada etapa antes de conectar los cuatro COB.
+> **Alcance del documento:** construí mi placa de control perforada siguiendo los diagramas eléctricos publicados. En esta guía documento sus conexiones y agrego recomendaciones de verificación y límites de corriente conservadores para quienes quieran reproducirla. Medí y probá cada etapa antes de conectar los cuatro COB.
 
 ## Diagramas de conexiones reproducibles
 
@@ -10,7 +10,7 @@ La [lámina eléctrica histórica original](../docs/historical/historical-electr
 
 ![Cableado de un canal y asignación de pines](../docs/diagrams/electrical-channel-and-pinout.svg)
 
-Estas láminas vectoriales se pueden ampliar sin perder nitidez. **Son esquemas funcionales de conexiones**, acompañados del pinout y los valores documentados abajo. No equivalen a un plano verificado del controlador físico soldado en el prototipo.
+Estas láminas vectoriales se pueden ampliar sin perder nitidez. **Son esquemas funcionales de conexiones**, acompañados del pinout y los valores documentados abajo. Corresponden a las conexiones que utilicé en el controlador de mi prototipo.
 
 ## Arquitectura
 
@@ -56,7 +56,7 @@ MCP6004 (-) ----------------------------> S / extremo superior de R_SENSE
 
 **Pin 4 = VDD (+5 V)** y **pin 11 = VSS (GND)**. Verificá la orientación de la muesca en el encapsulado antes de soldar.
 
-## Referencia propuesta: límite inicial ~190 mA
+## Límite de corriente conservador recomendado para reproducirlo: ~190 mA
 
 ~~~text
 +19 V -> fusible adecuado -> interruptor general -> VIN
