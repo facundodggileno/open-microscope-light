@@ -1,6 +1,6 @@
 # Guía de fabricación y armado
 
-Esta guía parte de la **V0.20 validada mecánicamente por el autor** y de un prototipo operativo instalado en un RELIFE RL-M3T durante más de un mes. Cada microscopio puede requerir modificar dimensiones.
+Esta guía parte de **mi diseño mecánico V0.20** y de un prototipo operativo que instalé en un RELIFE RL-M3T durante más de un mes. Cada microscopio puede requerir modificar dimensiones.
 
 ## Herramientas y componentes
 
@@ -29,7 +29,7 @@ En el archivo, definir la variable **part** como **"ring"**, **"arm"**, **"pod"*
 - Como punto de partida **no validado para todas las impresoras**: 0,16–0,20 mm de altura de capa, 4 perímetros y 30–50% de relleno.
 - Imprimí **un solo pod de prueba** antes de los cuatro; medí el paso de los agujeros M3 y la holgura del disipador. El clearance nominal parametrizado es **0,30 mm por lado**.
 
-**Material:** PLA se usó exclusivamente en el primer prototipo; el autor reporta más de un mes de uso estable sin falla estructural, pero los disipadores llegaron a ~95 °C al máximo. Para la versión final se consideran **ABS, ASA o policarbonato**, siempre validando resistencia a temperatura real de la pieza y tensiones de las capas. El PC requiere condiciones exigentes de impresión; el cambio de filamento **no reduce la temperatura del LED**.
+**Material:** PLA se usó exclusivamente en el primer prototipo; lo utilicé de forma estable durante más de un mes sin falla estructural, pero los disipadores llegaron a ~95 °C al máximo. Para la versión final se consideran **ABS, ASA o policarbonato**, siempre validando resistencia a temperatura real de la pieza y tensiones de las capas. El PC requiere condiciones exigentes de impresión; el cambio de filamento **no reduce la temperatura del LED**.
 
 ## 2. Montar aro, brazos y pods
 
@@ -43,7 +43,7 @@ En el archivo, definir la variable **part** como **"ring"**, **"arm"**, **"pod"*
 
 ## 3. Controlador analógico
 
-Preparar el controlador separado del objetivo y cablearlo siguiendo [WIRING_ES](../hardware/WIRING_ES.md). El hardware original del autor era perfboard; la documentación es un **diseño de referencia que debe verificarse**. La alimentación es DC externa aislada, no cableado de red dentro del microscopio.
+Preparar el controlador separado del objetivo y cablearlo siguiendo [WIRING_ES](../hardware/WIRING_ES.md). Construí mi controlador sobre placa perforada siguiendo los diagramas eléctricos publicados; verificá conexiones y valores antes de alimentar tu montaje. La alimentación es DC externa aislada, no cableado de red dentro del microscopio.
 
 Confirmar que ningún tab metálico de los IRLZ44N (eléctricamente DRAIN) pueda cortocircuitarse con otra parte conductora. Dimensionar la refrigeración de los MOSFET y el disipador de 5 V si fuera necesario.
 
