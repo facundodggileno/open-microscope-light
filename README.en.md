@@ -13,6 +13,14 @@ Open-source parametric microscope illuminator designed for electronics repair an
 ### Critical thermal warning
 Measured COB heatsinks: **55–63 °C after over one hour at ~50% control setting**, and **~95 °C after ~10 minutes at 100%**. The initial PLA structure survived normal use but is **not validated for full-power continuous operation**. Aluminium tape is not a thermal insulator. Consider ABS/ASA/PC and improve heatsinking if full power is required; verify actual mechanical and thermal conditions.
 
+### Electrical connection diagrams
+
+![Four-channel COB, IRLZ44N and MCP6004 connections](docs/diagrams/electrical-wiring-four-channels.svg)
+
+[Full four-channel connection diagram](docs/diagrams/electrical-wiring-four-channels.svg) · [Individual channel and MCP6004 pinout](docs/diagrams/electrical-channel-and-pinout.svg) · [Written wiring guide](hardware/WIRING_EN.md)
+
+These are **reference circuit connections**; the as-built perfboard has not been reverse-traced.
+
 ### Rebuild in seven steps
 1. Measure your microscope barrel/Barlow. The final V0.20 ring has **63 mm inner diameter, 83 mm outer diameter, 8 mm height** and three radial clamp screws.
 2. Open [cad/current/microscope_led_head_v020.scad](cad/current/microscope_led_head_v020.scad) in OpenSCAD; set **part** to **ring**, **arm**, **pod**, or **print_plate** and export STL.

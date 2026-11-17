@@ -50,6 +50,14 @@ El archivo principal es **[cad/current/microscope_led_head_v020.scad](cad/curren
 6. Verificá alimentación, polaridad, corrientes, aislamiento del tab de los MOSFET y temperatura según la [puesta en marcha](docs/COMMISSIONING.md).
 7. Ajustá los ángulos mirando una PCB real; apagá COB individuales para inspeccionar soldaduras y evitar reflejos especulares.
 
+## Diagramas de conexión eléctrica (4 canales)
+
+**Estos son los esquemas de cableado del proyecto, no diagramas de bloques genéricos.** Muestran las conexiones de los COB, los IRLZ44N, las resistencias de sensado, los cuatro amplificadores MCP6004, las entradas de control y la alimentación. Se ofrecen como una **implementación eléctrica de referencia**; no se dispone del cableado exacto verificado de la placa perforada del prototipo.
+
+![Conexiones de los cuatro COB, MOSFET y MCP6004](docs/diagrams/electrical-wiring-four-channels.svg)
+
+**[Ampliar diagrama completo de los cuatro canales](docs/diagrams/electrical-wiring-four-channels.svg)** · **[Conexiones de un canal y pinout](docs/diagrams/electrical-channel-and-pinout.svg)** · [Cableado por pin y valores](hardware/WIRING_ES.md)
+
 ## Diagrama del sistema
 
 ![Diagrama general de arquitectura](docs/diagrams/system-architecture.svg)

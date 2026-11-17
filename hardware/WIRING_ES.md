@@ -2,6 +2,14 @@
 
 > **Alcance del documento:** el controlador construido por el autor funciona, pero no se dispone de un netlist final relevado cable por cable ni de un PCB fabricable. Este esquema es una **implementación de referencia** basada en la arquitectura comprobada; los valores de polarización se eligieron conservadores para una primera reproducción. Medí y probá cada etapa antes de conectar los cuatro COB.
 
+## Diagramas de conexiones reproducibles
+
+![Conexiones de los cuatro canales](../docs/diagrams/electrical-wiring-four-channels.svg)
+
+![Cableado de un canal y asignación de pines](../docs/diagrams/electrical-channel-and-pinout.svg)
+
+Estas láminas vectoriales se pueden ampliar sin perder nitidez. **Son esquemas funcionales de conexiones**, acompañados del pinout y los valores documentados abajo. No equivalen a un plano verificado del controlador físico soldado en el prototipo.
+
 ## Arquitectura
 
 - Fuente externa **aislada de aproximadamente 19 V DC / ≥3 A**, con protección de entrada y polaridad verificada.
