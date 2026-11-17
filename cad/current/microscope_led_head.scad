@@ -41,12 +41,12 @@ ring_od              = ring_id + 2*ring_wall_radial;
 ring_h               = 8.0;
 
 // Tornillos radiales de fijación al microscopio
-scope_screw_angles   = [0,120,240];
-scope_screw_hole     = 3.2;     // V0.19: agujero más ajustado para tornillo ~M4 / Ø real ~3.7-3.8 mm
+scope_screw_angles   = [20,125,275];
+scope_screw_hole     = 3.7;     // V0.19: agujero más ajustado para tornillo ~M4 / Ø real ~3.7-3.8 mm
 scope_screw_length   = 23.0;
 
 // LEDs / brazos: SIEMPRE separados 90°
-led_phase            = 45.0;    // rotación global del conjunto de 4 LEDs
+led_phase            = 65.0;    // rotación global del conjunto de 4 LEDs
 arm_angles           = [led_phase,
                         led_phase+90,
                         led_phase+180,
@@ -67,9 +67,9 @@ pocket_l             = heatsink_l + 2*heatsink_clearance;
 
 // Unión aro -> brazo
 arm_tongue_w         = 8.0;
-arm_tongue_l         = 13.0;
+arm_tongue_l         = 12.0;
 arm_tongue_t         = 4.0;
-slot_clearance_xy    = 0.30;
+slot_clearance_xy    = .30;
 arm_slot_w           = arm_tongue_w + 2*slot_clearance_xy;
 arm_slot_l           = arm_tongue_l + 0.6;
 arm_slot_depth       = arm_tongue_t + 0.40;
@@ -89,7 +89,7 @@ arm_pivot_ear_t      = 5.0;
 // Pod / bandeja deslizante
 pod_wall             = 2.4;
 pod_back             = 2.8;
-pod_rail_h           = 5.0;
+pod_rail_h           = 4.0;
 pod_outer_w          = pocket_w + 2*pod_wall;
 pod_outer_l          = pocket_l + 2*pod_wall;
 
@@ -108,8 +108,8 @@ pod_neck_l           = 4.0;
 pod_neck_h           = 3.0;
 
 // Cable
-wire_channel_w       = 3.2;
-wire_channel_d       = 1.8;
+wire_channel_w       = 4.2;
+wire_channel_d       = 2.5;
 pod_wire_hole        = 4.0;
 
 pod_side_h           = 5.0;
