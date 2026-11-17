@@ -1,16 +1,20 @@
 
 /*
   PC SERVICE - Luz LED profesional para microscopio
-  Cabezal modular paramétrico V0.7
+  Cabezal modular paramétrico V0.8
   OpenSCAD
 
-  Cambios V0.7:
-  1) Encastres aro<->brazo abiertos, sin paredes que bloqueen el deslizamiento.
-  2) Eliminados bosses/guías salientes alrededor de los 3 tornillos M4 del microscopio.
-     Los agujeros M4 atraviesan directamente la pared del aro.
-  3) Pod simplificado: bandeja lisa para pegar el disipador, SIN clips / snap-fit.
-  4) Brazos recolocados para aumentar la separación respecto de las líneas de los tornillos.
-     Default: 30°, 90°, 210°, 270°. Todo queda parametrizado.
+  Cambios V0.8:
+  - 4 módulos LED nuevamente separados EXACTAMENTE 90°.
+  - Fase angular configurable; default 45° -> 45/135/225/315°.
+  - Se restauran las guías/paredes del pod para que el disipador pueda
+    deslizarse dentro del alojamiento.
+  - Se elimina únicamente la protuberancia molesta alrededor de la
+    articulación pod-brazo.
+  - Los agujeros M4 de fijación siguen directamente en la pared del aro,
+    sin bosses/guías salientes.
+  - Encastres aro-brazo siguen abiertos hacia el exterior para permitir
+    deslizamiento limpio.
 */
 
 part = "assembly";       // "assembly", "ring", "arm", "pod", "print_plate"
@@ -21,23 +25,25 @@ $fn = 96;
 // PARÁMETROS PRINCIPALES
 // ============================================================
 
-// Aro / microscopio
+// Aro
 ring_id              = 103.0;
 ring_wall_radial     = 10.0;
 ring_od              = ring_id + 2*ring_wall_radial;
 ring_h               = 8.0;
 
-// Tornillos de fijación al microscopio
+// Tornillos radiales de fijación al microscopio
 scope_screw_angles   = [0,120,240];
-scope_screw_hole     = 4.4;      // M4 con holgura
+scope_screw_hole     = 4.4;     // M4 con holgura
 scope_screw_length   = 23.0;
 
-// Posición de los brazos.
-// Se evita 45/135/225/315 porque 135 y 225 quedan a sólo 15° de M4 a 120/240.
-// Esta distribución deja ~30° de separación angular mínima.
-arm_angles           = [30,90,210,270];
+// LEDs / brazos: SIEMPRE separados 90°
+led_phase            = 45.0;    // rotación global del conjunto de 4 LEDs
+arm_angles           = [led_phase,
+                        led_phase+90,
+                        led_phase+180,
+                        led_phase+270];
 
-// Óptica / LEDs
+// Óptica
 cob_center_radius    = 68.0;
 pod_tilt             = 25.0;
 pod_drop             = 10.0;
@@ -45,44 +51,57 @@ pod_drop             = 10.0;
 // Disipador
 heatsink_w           = 22.0;
 heatsink_l           = 22.0;
-heatsink_h           = 13.0;     // editar según medición final
-heatsink_clearance   = 0.40;     // no es press-fit; sólo holgura visual/mecánica
+heatsink_h           = 13.0;    // editar si la medición final difiere
+heatsink_clearance   = 0.35;    // por lado
+pocket_w             = heatsink_w + 2*heatsink_clearance;
+pocket_l             = heatsink_l + 2*heatsink_clearance;
 
-// Unión aro -> brazo: canal abierto superior
+// Unión aro -> brazo
 arm_tongue_w         = 8.0;
 arm_tongue_l         = 13.0;
 arm_tongue_t         = 4.0;
-
 slot_clearance_xy    = 0.30;
 arm_slot_w           = arm_tongue_w + 2*slot_clearance_xy;
-arm_slot_l           = arm_tongue_l + 0.5;
-arm_slot_depth       = arm_tongue_t + 0.35;
+arm_slot_l           = arm_tongue_l + 0.6;
+arm_slot_depth       = arm_tongue_t + 0.40;
 
 // Bloqueo brazo -> aro
-arm_lock_hole        = 3.3;      // M3 pasante
-arm_lock_offset      = 4.0;      // desde extremo interior de la lengüeta
+arm_lock_hole        = 3.3;     // M3
+arm_lock_offset      = 4.0;
 
 // Brazo
 arm_w                = 10.0;
 arm_t                = 5.0;
-arm_pivot_r          = 63.5;     // eje M3 de articulación
+arm_pivot_r          = 63.5;
 arm_pivot_hole       = 3.3;
 arm_pivot_ear_d      = 9.0;
 arm_pivot_ear_t      = 5.0;
 
-// Pod
-pod_plate_w          = 25.0;
-pod_plate_l          = 25.0;
-pod_plate_t          = 3.0;
+// Pod / bandeja deslizante
+pod_wall             = 2.4;
+pod_back             = 2.8;
+pod_rail_h           = 5.0;
+pod_outer_w          = pocket_w + 2*pod_wall;
+pod_outer_l          = pocket_l + 2*pod_wall;
+
+// Apertura frontal del pod para insertar/deslizar el disipador.
+// El disipador entra desde el lado exterior (+X local).
+pod_front_open       = true;
+
+// Horquilla de articulación
 pod_fork_t           = 4.0;
 pod_fork_gap         = arm_pivot_ear_t + 0.40;
 pod_pivot_hole       = 3.3;
 pod_pivot_ear_d      = 9.0;
-pod_wire_hole        = 4.0;
 
-// Canaletas
+// Cuello compacto: NO sobresale hacia la zona del disipador.
+pod_neck_l           = 4.0;
+pod_neck_h           = 3.0;
+
+// Cable
 wire_channel_w       = 3.2;
 wire_channel_d       = 1.8;
+pod_wire_hole        = 4.0;
 
 // ============================================================
 // UTILIDADES
@@ -101,46 +120,55 @@ module radial(angle, r=0, z=0){
 module ring_body(){
     difference(){
         union(){
-            // Aro simple, sin bosses salientes para los tornillos M4
+            // Aro simple
             difference(){
                 cylinder(h=ring_h, d=ring_od);
                 translate([0,0,-0.5])
                     cylinder(h=ring_h+1, d=ring_id);
             }
 
-            // Pequeñas plataformas interiores/superiores para los anclajes de brazo.
-            // No crean paredes laterales: sólo aportan espesor local.
+            // Refuerzo bajo cada ranura de brazo.
+            // No forma paredes laterales que bloqueen la entrada.
             for(a = arm_angles){
                 rotate([0,0,a])
-                    translate([ring_od/2 - arm_slot_l/2 - 1.5, 0, ring_h])
-                        cube([arm_slot_l+5, arm_slot_w+5, 2.5], center=true);
+                    translate([ring_od/2 - arm_slot_l/2 - 1.0,
+                               0,
+                               ring_h + 1.0])
+                        cube([arm_slot_l+4,
+                              arm_slot_w+4,
+                              2.0],
+                             center=true);
             }
         }
 
-        // M4 RADIALES DIRECTOS: sin guía/boss exterior.
+        // Agujeros M4 radiales directos
         for(a = scope_screw_angles){
             rotate([0,0,a])
                 translate([ring_od/2,0,ring_h/2])
                     rotate([0,90,0])
-                        cylinder(h=ring_wall_radial*2 + 5,
+                        cylinder(h=ring_wall_radial*2 + 6,
                                  d=scope_screw_hole,
                                  center=true);
         }
 
-        // Canales ABIERTOS SUPERIORES para los brazos.
-        // La ranura llega hasta el borde exterior: el brazo puede deslizar desde afuera.
+        // Ranuras abiertas al borde exterior
         for(a = arm_angles){
             rotate([0,0,a])
-                translate([ring_od/2 - arm_slot_l/2 + 0.4, 0,
-                           ring_h - arm_slot_depth/2 + 1.0])
-                    cube([arm_slot_l+3.0,
+                translate([ring_od/2 - arm_slot_l/2 + 1.0,
+                           0,
+                           ring_h - arm_slot_depth/2 + 1.1])
+                    cube([arm_slot_l+4.0,
                           arm_slot_w,
-                          arm_slot_depth+2.2],
+                          arm_slot_depth+2.5],
                          center=true);
 
-            // M3 vertical para bloquear el brazo
+            // Agujero M3 vertical de bloqueo.
+            // Está radialmente desplazado respecto al M4, por lo que aun
+            // en posiciones angulares próximas no cruza el agujero radial.
             rotate([0,0,a])
-                translate([ring_od/2 - arm_lock_offset,0,ring_h/2])
+                translate([ring_od/2 - arm_lock_offset,
+                           0,
+                           ring_h/2])
                     cylinder(h=ring_h+6,
                              d=arm_lock_hole,
                              center=true);
@@ -149,7 +177,8 @@ module ring_body(){
         // Canaleta superior circular para cableado
         translate([0,0,ring_h-wire_channel_d/2+0.05])
             difference(){
-                cylinder(h=wire_channel_d+0.2, d=ring_od-5);
+                cylinder(h=wire_channel_d+0.2,
+                         d=ring_od-5);
                 cylinder(h=wire_channel_d+0.4,
                          d=ring_od-5-2*wire_channel_w);
             }
@@ -161,12 +190,13 @@ module ring_body(){
 // ============================================================
 
 module arm_part(){
-    total_len = (arm_pivot_r - (ring_od/2 - arm_tongue_l + 1.0));
+    base_r_local = ring_od/2 - arm_tongue_l + 1.0;
+    total_len = arm_pivot_r - base_r_local;
     body_len = max(8, total_len - arm_tongue_l);
 
     difference(){
         union(){
-            // Lengüeta limpia de entrada al aro
+            // Lengüeta de inserción
             translate([arm_tongue_l/2,0,arm_tongue_t/2])
                 cube([arm_tongue_l,
                       arm_tongue_w,
@@ -174,10 +204,15 @@ module arm_part(){
                      center=true);
 
             // Cuerpo
-            translate([arm_tongue_l + body_len/2 - 1,0,arm_t/2])
-                cube([body_len+2,arm_w,arm_t],center=true);
+            translate([arm_tongue_l + body_len/2 - 1,
+                       0,
+                       arm_t/2])
+                cube([body_len+2,
+                      arm_w,
+                      arm_t],
+                     center=true);
 
-            // Oreja simple para el pivote del pod
+            // Oreja central para articulación
             pivot_x = arm_tongue_l + body_len;
             translate([pivot_x,0,arm_t/2])
                 rotate([90,0,0])
@@ -186,11 +221,13 @@ module arm_part(){
                              center=true);
         }
 
-        // Agujero M3 de bloqueo aro-brazo
+        // M3 de bloqueo
         translate([arm_tongue_l-arm_lock_offset,0,0])
-            cylinder(h=12,d=arm_lock_hole,center=true);
+            cylinder(h=12,
+                     d=arm_lock_hole,
+                     center=true);
 
-        // Agujero M3 de articulación
+        // M3 del pivote
         pivot_x = arm_tongue_l + body_len;
         translate([pivot_x,0,arm_t/2])
             rotate([90,0,0])
@@ -198,7 +235,7 @@ module arm_part(){
                          d=arm_pivot_hole,
                          center=true);
 
-        // Canaleta abierta para cable
+        // Canaleta de cable
         translate([arm_tongue_l + body_len/2 - 1,
                    0,
                    arm_t-wire_channel_d/2+0.05])
@@ -210,58 +247,90 @@ module arm_part(){
 }
 
 // ============================================================
-// POD LISO PARA PEGAR DISIPADOR
+// POD CON GUÍAS DESLIZANTES RESTAURADAS
 // ============================================================
 
 module pod_raw(){
-    // Bandeja totalmente lisa: sin clips, sin paredes de press-fit, sin retenes.
-    // El disipador se pega sobre la cara plana externa.
-    union(){
-        // Placa soporte del disipador
-        cube([pod_plate_l,pod_plate_w,pod_plate_t],center=true);
+    fork_x = -pod_outer_l/2 - pod_pivot_ear_d/2 + 1.2;
 
-        // Horquilla del pivote: dos orejas planas SOLAMENTE.
-        // Ninguna protuberancia adicional frente/atrás.
-        fork_x = -pod_plate_l/2 - pod_pivot_ear_d/2 + 1.0;
+    difference(){
+        union(){
+            // Fondo/base donde se pega/apoya el disipador
+            cube([pod_outer_l,
+                  pod_outer_w,
+                  pod_back],
+                 center=true);
 
+            // DOS GUÍAS LATERALES:
+            // permiten deslizar el disipador desde el frente.
+            for(s=[-1,1]){
+                translate([0,
+                           s*(pocket_w/2 + pod_wall/2),
+                           pod_rail_h/2])
+                    cube([pod_outer_l,
+                          pod_wall,
+                          pod_rail_h],
+                         center=true);
+            }
+
+            // Tope trasero solamente.
+            // El frente queda completamente abierto para insertar el disipador.
+            translate([-pod_outer_l/2 + pod_wall/2,
+                       0,
+                       pod_rail_h/2])
+                cube([pod_wall,
+                      pod_outer_w,
+                      pod_rail_h],
+                     center=true);
+
+            // Horquilla: dos orejas limpias
+            for(s=[-1,1]){
+                translate([fork_x,
+                           s*(pod_fork_gap/2 + pod_fork_t/2),
+                           0])
+                    rotate([90,0,0])
+                        cylinder(h=pod_fork_t,
+                                 d=pod_pivot_ear_d,
+                                 center=true);
+            }
+
+            // Cuello MÍNIMO entre horquilla y fondo.
+            // Queda detrás del tope y no invade el canal del disipador.
+            translate([-pod_outer_l/2 - pod_neck_l/2 + 0.8,
+                       0,
+                       0])
+                cube([pod_neck_l,
+                      pod_fork_gap + 2*pod_fork_t,
+                      pod_neck_h],
+                     center=true);
+        }
+
+        // Agujeros del pivote M3
         for(s=[-1,1]){
             translate([fork_x,
                        s*(pod_fork_gap/2 + pod_fork_t/2),
                        0])
                 rotate([90,0,0])
-                    difference(){
-                        cylinder(h=pod_fork_t,
-                                 d=pod_pivot_ear_d,
-                                 center=true);
-                        cylinder(h=pod_fork_t+2,
-                                 d=pod_pivot_hole,
-                                 center=true);
-                    }
+                    cylinder(h=pod_fork_t+3,
+                             d=pod_pivot_hole,
+                             center=true);
         }
 
-        // Cuello rectangular mínimo que une horquilla y placa.
-        // Se mantiene dentro del ancho de la horquilla y no sobresale hacia el disipador.
-        translate([-pod_plate_l/2+1.5,0,0])
-            cube([5.0,
-                  pod_fork_gap + 2*pod_fork_t,
-                  pod_plate_t],
-                 center=true);
+        // Paso de cable.
+        // Se coloca cerca del tope trasero y no genera protuberancias.
+        translate([-pod_outer_l/2 + 4.0,
+                   0,
+                   0])
+            rotate([0,90,0])
+                cylinder(h=8,
+                         d=pod_wire_hole,
+                         center=true);
     }
 }
 
 module pod_part(){
-    // Inclinación inicial; la articulación M3 permite modificarla.
     rotate([0,pod_tilt,0])
-        difference(){
-            pod_raw();
-
-            // Paso de cable simple, sin boss.
-            translate([pod_plate_l/4,0,0])
-                rotate([0,90,0])
-                    cylinder(h=pod_plate_l,
-                             d=pod_wire_hole,
-                             center=true);
-        }
+        pod_raw();
 }
 
 // ============================================================
@@ -269,14 +338,16 @@ module pod_part(){
 // ============================================================
 
 module assembled(){
-    color([0.22,0.22,0.24]) ring_body();
+    color([0.22,0.22,0.24])
+        ring_body();
 
     for(a = arm_angles){
-        // El brazo entra desde el borde exterior en su canal abierto
         base_r = ring_od/2 - arm_tongue_l + 1.0;
 
         color([0.16,0.16,0.18])
-            radial(a, base_r + exploded, ring_h)
+            radial(a,
+                   base_r + exploded,
+                   ring_h)
                 arm_part();
 
         color([0.10,0.10,0.12])
@@ -285,11 +356,11 @@ module assembled(){
                    ring_h + arm_t/2 - pod_drop)
                 pod_part();
 
-        // Disipador conceptual simplemente APOYADO/PEGADO al pod
+        // Disipador conceptual dentro del canal
         color([0.38,0.38,0.40,0.85])
             radial(a,
                    cob_center_radius + exploded*1.8,
-                   ring_h - pod_drop + heatsink_h/2 + 2.0)
+                   ring_h - pod_drop + heatsink_h/2 + pod_back/2)
                 rotate([0,pod_tilt,0])
                     cube([heatsink_l,
                           heatsink_w,
@@ -300,9 +371,10 @@ module assembled(){
         color([1.0,0.75,0.08])
             radial(a,
                    cob_center_radius + exploded*1.8,
-                   ring_h - pod_drop + 1.3)
+                   ring_h - pod_drop + pod_back/2 + 0.8)
                 rotate([0,pod_tilt,0])
-                    cube([13,13,1.0],center=true);
+                    cube([13,13,1.0],
+                         center=true);
     }
 }
 
@@ -311,7 +383,7 @@ module assembled(){
 // ============================================================
 
 module print_plate(){
-    translate([0,0,0]) ring_body();
+    ring_body();
 
     for(i=[0:3])
         translate([145,-45+i*30,0])
