@@ -1,9 +1,7 @@
-# Fotografías y previsualizaciones
+# Fotografías del prototipo
 
-La fotografía del prototipo realmente instalado en un **RELIFE RL-M3T** fue aportada por el autor. Está incluida junto con las capturas históricas, los renders V0.20 y el material fuente completo en el **paquete de distribución adjunto a la conversación de origen**.
+![Prototipo funcional montado en el RELIFE RL-M3T](prototype-installed-relife-rl-m3t.jpg)
 
-La integración de archivos GitHub usada para importar el código no proporciona un mecanismo para transferir automáticamente los bytes de fotografías/archivos binarios del contenedor. Por ese motivo **no presentamos imágenes de stock ni ilustraciones como si fueran fotos reales del montaje**.
+**Fotografía real proporcionada por el autor.** La versión publicada en GitHub está reducida en resolución para facilitar su transferencia; la imagen original a resolución superior se conserva en el paquete de distribución completo. También se publica un render CAD generado automáticamente por GitHub Actions en **v020-assembly-preview.png**.
 
-**Pendiente de incorporar a esta carpeta:** fotografía real del prototipo montado, detalle del cabezal, vistas renderizadas de V0.20, y láminas antiguas etiquetadas expresamente como documentos no verificados.
-
-El código fuente CAD y los esquemas editables ya están publicados en las carpetas correspondientes.
+El prototipo en PLA tiene más de un mes de uso estable. Esto no invalida la advertencia sobre los 95 °C medidos al máximo.

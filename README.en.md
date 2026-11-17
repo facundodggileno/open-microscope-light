@@ -2,6 +2,8 @@
 
 [Español](README.md) · [Build guide](docs/BUILD_ES.md) · [Reference wiring](hardware/WIRING_ES.md) · [BOM](bom/BOM.csv)
 
+![Working prototype on RELIFE RL-M3T](docs/photos/prototype-installed-relife-rl-m3t.jpg)
+
 Open-source parametric microscope illuminator designed for electronics repair and microsoldering. It uses **four independently switchable COB LEDs** with analog current regulation (no intentionally applied LED PWM) and an articulated, 3D-printable four-pod head.
 
 **Build status:** a PLA prototype was assembled on a **RELIFE RL-M3T** stereo microscope and has been used successfully for **over one month**. The original controller is functional on perfboard; the published electronic schematic is a *reproducible reference design*, not an electrically traced copy of that specific board.

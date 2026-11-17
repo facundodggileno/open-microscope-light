@@ -4,6 +4,8 @@
 
 [English](README.en.md) · [Construcción](docs/BUILD_ES.md) · [Electrónica](hardware/WIRING_ES.md) · [BOM](bom/BOM.csv) · [Historial](CHANGELOG.md)
 
+![Prototipo real montado en el RELIFE RL-M3T](docs/photos/prototype-installed-relife-rl-m3t.jpg)
+
 **Estado:** prototipo funcional, construido e instalado en un **RELIFE RL-M3T** y utilizado de forma estable durante más de un mes. El controlador analógico se montó en placa perforada. **Versión final mecánica del autor: V0.20.**
 
 > [!WARNING]
@@ -74,6 +76,6 @@ Diagramas editables: [arquitectura](docs/diagrams/system-architecture.mmd), [can
 - [Uso óptico: 4/3/2 fuentes y reflejos](docs/OPTICS_AND_USE.md)
 - [Evolución del diseño y limitaciones](docs/HISTORY_ES.md)
 - [Parámetros y exportación CAD](docs/CAD_GUIDE.md)
-- [Fotografías y recursos originales](docs/photos/README.md)
+- [Fotografía real del montaje](docs/photos/prototype-installed-relife-rl-m3t.jpg) · [Fotografías y recursos originales](docs/photos/README.md)
 
 **Autor del prototipo:** PC Service Computación / [facundodggileno](https://github.com/facundodggileno). Proyecto DIY experimental, sin garantía. **Licencia del contenido aquí publicado: MIT** (ver [LICENSE](LICENSE)).
