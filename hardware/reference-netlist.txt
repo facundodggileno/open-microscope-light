@@ -1,0 +1,21 @@
+OpenMicroscope Light - REFERENCE ONLY, NOT MEASURED AS-BUILT NETLIST
+
+VIN +19V -> LED1.A LED2.A LED3.A LED4.A, 78L05.IN, Cbulk+, Cin+
+GND -> 78L05.GND, MCP6004.pin11, TL431.A, Cbulk-, Cin-, C5V-, C100nF-, Rbottom.GND,
+       Rsense1.bottom Rsense2.bottom Rsense3.bottom Rsense4.bottom
++5V -> MCP6004.pin4, TL431.Rbias.top, C5V+, C100nF+
+TL431.K connected to TL431.REF and Rbias.bottom and Rtop.top
+Rbias=1k from +5V to TL431.K
+Rtop=12k from TL431.K to DIM_MAX
+Rbottom=1k from DIM_MAX to GND
+B10K high to DIM_MAX, low to GND, wiper to DIM_BUS
+Channel 1: DIM_BUS->SW1->Rin1=1k->MCP6004.pin3; MCP6004.pin2->Q1.S/Rsense1.top;
+MCP6004.pin1->Rgate1=1k->Q1.G; Q1.G->Rgs1=100k->Q1.S; LED1.K->Q1.D
+Channel 2: DIM_BUS->SW2->Rin2=1k->MCP6004.pin5; MCP6004.pin6->Q2.S/Rsense2.top;
+MCP6004.pin7->Rgate2=1k->Q2.G; Q2.G->Rgs2=100k->Q2.S; LED2.K->Q2.D
+Channel 3: DIM_BUS->SW3->Rin3=1k->MCP6004.pin10; MCP6004.pin9->Q3.S/Rsense3.top;
+MCP6004.pin8->Rgate3=1k->Q3.G; Q3.G->Rgs3=100k->Q3.S; LED3.K->Q3.D
+Channel 4: DIM_BUS->SW4->Rin4=1k->MCP6004.pin12; MCP6004.pin13->Q4.S/Rsense4.top;
+MCP6004.pin14->Rgate4=1k->Q4.G; Q4.G->Rgs4=100k->Q4.S; LED4.K->Q4.D
+Rpulldown1..4=100k from each opamp (+) to GND, optional 100nF filter each
+IMPORTANT: TO220 TAB of IRLZ44N = DRAIN. Verify pinouts against manufacturer datasheets.

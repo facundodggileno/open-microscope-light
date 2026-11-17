@@ -1,0 +1,5 @@
+canal,opamp,mcp6004_in_plus,mcp6004_in_minus,mcp6004_out,mosfet,led,shunt_ohms,nota
+1,A,3,2,1,Q1,COB1,1,VDD=4 VSS=11
+2,B,5,6,7,Q2,COB2,1,VDD=4 VSS=11
+3,C,10,9,8,Q3,COB3,1,VDD=4 VSS=11
+4,D,12,13,14,Q4,COB4,1,VDD=4 VSS=11

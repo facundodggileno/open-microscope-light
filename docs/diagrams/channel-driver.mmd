@@ -1,0 +1,13 @@
+flowchart LR
+  V["+19 V"] --> LED["COB LED (+) a (-)"]
+  LED --> D["IRLZ44N D"]
+  D --> S["IRLZ44N S"]
+  S --> RS["1 Ω sense"]
+  RS --> GND["GND"]
+  CONTROL["DIM_BUS"] --> SW["Switch"] --> RI["Rin 1k"] --> PLUS["MCP6004 (+)"]
+  S -. "feedback" .-> MINUS["MCP6004 (-)"]
+  PLUS --> AMP["MCP6004"] 
+  MINUS --> AMP
+  AMP --> RG["Rgate 1k"] --> G["IRLZ44N G"]
+  G --> RGS["Rgs 100k"] --> S
+  PLUS --> PD["Rpull 100k"] --> GND

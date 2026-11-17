@@ -1,0 +1,11 @@
+flowchart LR
+  VIN["19 V DC"] --> REG["78L05"] --> V5["+5 V"]
+  V5 --> RB["Rbias 1k"] --> TL["TL431 K/REF = 2.495V"]
+  TL --> RT["Rtop 12k"] --> VMAX["Vdim max 0.192V"] --> RBT["Rbottom 1k"] --> GND["GND"]
+  VMAX --> POT["B10K high"]
+  POT --> WIP["B10K wiper DIM_BUS"]
+  GND --> POT
+  WIP --> S1["Switch 1"]
+  WIP --> S2["Switch 2"]
+  WIP --> S3["Switch 3"]
+  WIP --> S4["Switch 4"]

@@ -1,0 +1,32 @@
+cantidad,elemento,especificacion,estado,observaciones
+4,COB LED,XIANGCLEAR 1311-5W 6000K Ra95 declarado,montado,Corroborar lote y polaridad; max ensayado ~340-350mA
+4,Disipador aluminio,22x22x13 mm nominal,montado,Al max llegó a ~95C en 10 min
+4,MOSFET N canal,IRLZ44N / IRLZ44NPBF TO-220,montado,Tab es DRAIN; disipar calor
+1,Amplificador operacional cuadruple,MCP6004-I/P PDIP-14,montado,Cuatro lazos de corriente
+1,Referencia programable,TL431A TO-92,montado,Pinout según fabricante
+1,Regulador de 5V,78L05 TO-92,montado,Pinout según fabricante
+1,Potenciometro,B10K lineal,montado,Brillo compartido
+4,Interruptor SPST por canal,On/off,montado,Habilitan referencia
+1,Interruptor general,SPST DC rated,recomendado,Apto para 19V y corriente real
+4,Resistencia shunt,1 ohm 1% >=0.5W,referencia,Cada canal necesita su propia resistencia
+4,Resistencia de gate,1 kohm >=0.125W,referencia,Entre opamp y gate
+4,Resistencia gate-source,100 kohm >=0.125W,referencia,Gate a source
+4,Resistencia entrada +,1 kohm >=0.125W,referencia,Interruptor a opamp +
+4,Resistencia pull-down,100 kohm >=0.125W,referencia,Opamp + a GND
+4,Capacitor filtro +,100 nF ceramico,opcional,Filtrado de referencia de canal
+1,Resistencia bias TL431,1 kohm >=0.125W,referencia,+5V a catodo TL431
+1,Resistencia divisor superior,12 kohm >=0.125W,referencia,Limite de referencia ~192mA
+1,Resistencia divisor inferior,1 kohm >=0.125W,referencia,Limite de referencia ~192mA
+1,Capacitor bulk VIN,470-1000 uF >=35V,recomendado,Cuidado polaridad
+2,Capacitor 100nF desacoplo,ceramico,recomendado,5V y VIN
+1,Capacitor +5V,10 uF >=16V,recomendado,Electrolitico
+1,Fuente notebook DC aislada,19V >=3A,recomendado,Verificar polaridad
+1,Fusible con portafusible,adecuado a cables y fuente,recomendado,Protección de entrada
+1,PCB perforada,perfboard,montado,Placa de control separada
+1,Caja aislante para control,Dimensionar a disipacion,recomendado,No colocar MOSFET sin ventilación
+3,Tornillos radiales,~M4x23mm ~3.7-3.8mm medido,montado,Verificar punta vs óptica
+4,Pivote del pod,M3 con tuerca y arandela,montado,Holgura articulación
+4,Fijacion brazo-aro,M3 con tuerca y arandela,montado,Montaje
+1,Cableado,cobre flexible apto al calor,montado,Alivio de tensión
+1,Interfaz termica,compuesto termico apto,recomendado,COB a disipador
+1,Filamento para piezas definitivas,ABS/ASA/PC propuesto,propuesto,PLA fue prototipo

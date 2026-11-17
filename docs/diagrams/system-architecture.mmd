@@ -1,0 +1,11 @@
+flowchart LR
+  PSU["Fuente notebook aislada 19 V DC"] --> SAFE["Fusible / llave / filtrado"]
+  SAFE --> L["4 × COB LED en paralelo por ramas"]
+  SAFE --> REG["78L05 a +5 V"]
+  REG --> REF["TL431 + B10K"]
+  REF --> SW["4 × switch ON/OFF"]
+  SW --> OP["MCP6004: 4 amplificadores"]
+  OP --> Q["4 × IRLZ44N"]
+  L --> Q
+  Q --> SH["4 × shunt 1Ω a masa"]
+  SH -. "realimentación individual" .-> OP
