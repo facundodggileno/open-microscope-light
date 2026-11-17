@@ -25,3 +25,9 @@ Measured COB heatsinks: **55–63 °C after over one hour at ~50% control settin
 **CAD archives:** [cad/history](cad/history/) and commit history. **Docs:** [build](docs/BUILD_ES.md), [electronics](hardware/WIRING_ES.md), [thermal tests](docs/THERMAL_TESTS.md), [CAD](docs/CAD_GUIDE.md).
 
 Author: PC Service Computación / [facundodggileno](https://github.com/facundodggileno). MIT-licensed experimental DIY project, without warranty.
+
+## In-depth English documentation
+
+- [Detailed build and assembly guide](docs/BUILD_EN.md)
+- [Reference circuit and pin-by-pin wiring](hardware/WIRING_EN.md)
+- [Measured thermal results and material limitations](docs/THERMAL_TESTS_EN.md)
