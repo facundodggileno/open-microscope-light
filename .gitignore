@@ -1,0 +1,13 @@
+# OpenSCAD preview/cache files
+*.csg
+*.dxf
+*.eps
+*.off
+*.amf
+*.3mf
+*~
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+*.log
